@@ -35,5 +35,5 @@ Week 1 (02/27 - 03/5):
 1. Implement feature: User Registration with Google Account
 2. Set up Azure environment for deployment
 3. Create Azure deployment pipelines
-4. Write Getting Started documentation
-5. Set up project repository on Github
+4. Write Getting Started documentation ✔️
+5. Set up project repository on Github ✔️
