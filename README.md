@@ -31,8 +31,8 @@ The City Voting Platform app follows a client-server architecture. The client-si
 To become a part of city's community, simply register or sign in with your Google account. Then, you can access different projects, choose the most interesting ones and help them to become a reality.
 
 ## Project Task Decomposition
-Week 1 (02/27 - 03/5):
-1. Implement feature: User Registration with Google Account
+Week 1 (02/27 - 03/06):
+1. Implement feature: User Registration with Google Account ✔️
 2. Set up Azure environment for deployment
 3. Create Azure deployment pipelines
 4. Write Getting Started documentation ✔️
