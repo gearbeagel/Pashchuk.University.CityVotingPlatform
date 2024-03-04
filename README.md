@@ -34,6 +34,6 @@ To become a part of city's community, simply register or sign in with your Googl
 Week 1 (02/27 - 03/06):
 1. Implement feature: User Registration with Google Account ✔️
 2. Set up Azure environment for deployment ✔️
-3. Create Azure deployment pipelines
+3. Create Azure deployment pipelines ✔️
 4. Write Getting Started documentation ✔️
 5. Set up project repository on Github ✔️
