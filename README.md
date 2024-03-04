@@ -37,6 +37,7 @@ Week 1 (02/27 - 03/06):
 3. Create Azure deployment pipelines ✔️
 4. Write Getting Started documentation ✔️
 5. Set up project repository on Github ✔️
+
 Week 2 (03/06 - 03/13):
 1. Implement feature: Welcome Email upon registration
 2. Develop interactive map interface
