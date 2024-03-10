@@ -42,5 +42,5 @@ Week 2 (03/06 - 03/13):
 1. Implement feature: Welcome Email upon registration
 2. Develop interactive map interface
 3. Configure user authentication using OAuth 2.0
-4. Write initial project documentation
-5. Set up Continuous Integration/Continuous Delivery (CI/CD) pipeline
+4. Write initial project documentation ✔️
+5. Set up Continuous Integration/Continuous Delivery (CI/CD) pipeline ✔️
