@@ -33,7 +33,14 @@ To become a part of city's community, simply register or sign in with your Googl
 ## Project Task Decomposition
 Week 1 (02/27 - 03/06):
 1. Implement feature: User Registration with Google Account ✔️
-2. Set up Azure environment for deployment
-3. Create Azure deployment pipelines
+2. Set up Azure environment for deployment ✔️
+3. Create Azure deployment pipelines ✔️
 4. Write Getting Started documentation ✔️
 5. Set up project repository on Github ✔️
+
+Week 2 (03/06 - 03/13):
+1. Implement feature: Welcome Email upon registration
+2. Develop interactive map interface
+3. Configure user authentication using OAuth 2.0
+4. Write initial project documentation
+5. Set up Continuous Integration/Continuous Delivery (CI/CD) pipeline
