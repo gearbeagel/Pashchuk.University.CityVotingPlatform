@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color:#C9BC93;
+    background-color: #dac280;
     font-family: 'Montserrat', sans-serif;
     font-family: 'Rethink Sans', sans-serif;
     display: flex;
@@ -13,7 +13,7 @@ body {
     margin-top: 5%;
     width: 45%;
     height: 500px;
-    background-color: #B6875D;
+    background-color: #ffffff;
     border-radius: 40px;
     text-align: center;
     box-shadow: 0 0 9px #888888;

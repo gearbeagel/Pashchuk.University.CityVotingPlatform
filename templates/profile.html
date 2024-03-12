@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
-    <link rel="stylesheet" href= "{%static 'profile_style.css'%}">
+    <link rel="stylesheet" href="{% static 'profile_style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Rethink+Sans&display=swap" rel="stylesheet">
@@ -13,8 +13,8 @@
 <body>
     <div class="content">
         <div class="content-topic">
-            <p>Вітаємо у профілі!</p>
-            <p><strong>{{last_topic}}</strong></p>
+            <p>Вітаємо у профілі, {{ username }}!</p>
+            <a href="/">Go to homepage</a>
         </div>
     </div>
 </body>

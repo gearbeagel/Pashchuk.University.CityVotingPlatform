@@ -5,7 +5,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Register</title>
-    <!-- Include Font Awesome CSS via CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
@@ -13,5 +12,26 @@
     <a href="{% provider_login_url 'google'%}?next=/">
         <i class="fab fa-google"></i> Login with Google
     </a>
+    <h2>Separate Form</h2>
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.username.label }}
+        {{ form.username }}
+        {{ form.username.errors }}
+
+        {{ form.email.label }}
+        {{ form.email }}
+        {{ form.email.errors }}
+
+        {{ form.password1.label }}
+        {{ form.password1 }}
+        {{ form.password1.errors }}
+
+        {{ form.password2.label }}
+        {{ form.password2 }}
+        {{ form.password2.errors }}
+        <input type="submit" name="Create User">
+    </form>
+    <a href="/">Go to homepage</a>
 </body>
 </html>
