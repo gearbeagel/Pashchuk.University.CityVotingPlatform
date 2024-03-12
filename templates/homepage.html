@@ -1,15 +1,23 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
+    <link rel="stylesheet" href="{% static 'homepage_style.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Rethink+Sans&display=swap" rel="stylesheet">
 </head>
 <body>
-    <section class="main">
+    <header>
         <h1>City Voting Platform</h1>
-        <br>
-        <a href="/register"><button>Get started</button></a>
-        <a href="/profile"><button>Go to profile</button></a>
-    </section>
+        <div class="header-buttons">
+            <a href="/profile">Profile</a>
+            <a href="/login">Login</a>
+            <a href="/register">Register</a>
+        </div>
+    </header>
 </body>
 </html>
