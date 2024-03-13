@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'city_voting_registration',
-    'city_voting_map',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +135,7 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Site ID
-SITE_ID = 3
+SITE_ID = 2
 
 # Social authentication settings
 SOCIALACCOUNT_LOGIN_ON_GET = True
