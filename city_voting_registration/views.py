@@ -3,7 +3,8 @@ from django.urls import reverse
 from .forms import CreateUserForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login
-
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 # Create your views here.
@@ -16,6 +17,13 @@ def register(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
+            username = request.POST['username']
+            email = request.POST['email']
+            subject = 'Welcome to City Voting Platform!'
+            message = f'{username}, thanks for becoming a part of our community!'
+            from_email = settings.EMAIL_HOST_USER
+            recipient_list = [email]
+            send_mail(subject, message, from_email, recipient_list, fail_silently=False)
             form.save()
             return redirect('login')
 
