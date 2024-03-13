@@ -23,5 +23,6 @@ urlpatterns = [
     path('', include("allauth.urls")),
     path('accounts/google/login/callback/', views.callback_view, name='google_callback'),
     path('', include('city_voting_registration.urls')),
+    path('', include('city_map.urls')),
     path('', views.home, name='home'),
 ]
