@@ -125,6 +125,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 STATICFILES_DIRS = [
     BASE_DIR / "static",
     "/var/www/static/",
