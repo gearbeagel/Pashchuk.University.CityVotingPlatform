@@ -22,6 +22,7 @@ City Voting Platform is the best desicion for goverment of a small city to conne
 
 ### Features
 - User Authentication with Google account.
+- Welcome Email upon registration.
 - Coming soon.
 
 ### Architecture
@@ -41,6 +42,14 @@ Week 1 (02/27 - 03/06):
 Week 2 (03/06 - 03/13):
 1. Implement feature: Welcome Email upon registration ✔️
 2. Develop interactive map interface ✔️
-3. Configure user authentication using OAuth 2.0
+3. Configure user authentication using OAuth 2.0 ✔️
 4. Write initial project documentation ✔️
 5. Set up Continuous Integration/Continuous Delivery (CI/CD) pipeline ✔️
+
+Week 3 (03/13 - 03/20):
+1. Implement feature: Project Voting functionality
+2. Design database schema for projects and user data
+3. Implement backend services for project management
+4. Write unit tests for authentication and project services
+5. Refine CI/CD pipeline for automated testing
+
