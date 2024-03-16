@@ -2,9 +2,12 @@ from django.shortcuts import render, redirect
 from django.urls import reverse
 from .forms import CreateUserForm
 from django.contrib.auth.forms import AuthenticationForm
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.core.mail import send_mail
 from django.conf import settings
+from allauth.socialaccount.models import SocialAccount
+from django.contrib.auth.models import User
+
 
 
 # Create your views here.
@@ -31,10 +34,6 @@ def register(request):
     return render(request, "register.html", context)
 
 
-def callback_view(request):
-    return redirect(reverse('home'))
-
-
 def profile(request):
     username = None
     if request.user.is_authenticated:
@@ -55,3 +54,8 @@ def login_view(request):
     else:
         form = AuthenticationForm()
     return render(request, "login.html", {'form': form})
+
+
+def logout_view(request):
+    logout(request)
+    return redirect("login")

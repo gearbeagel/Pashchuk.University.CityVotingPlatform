@@ -16,6 +16,7 @@
     {% if form.non_field_errors %}
         <p>{{ form.non_field_errors }}</p>
     {% endif %}
+    <a href="{% url 'logout_view' %}">Logout</a>
     <a href="/">Go to homepage</a>
 </body>
 </html>
