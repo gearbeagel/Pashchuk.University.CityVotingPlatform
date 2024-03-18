@@ -16,6 +16,7 @@ SECRET_KEY = 'django-insecure-irmqc@66c6ti_c)-g065*wkghwlx(y3go6k6n6q)g37c_waei!
 DEBUG = True
 
 ALLOWED_HOSTS = ['cityvoting.azurewebsites.net', '127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://cityvoting.azurewebsites.net']
 
 
 # Application definition
