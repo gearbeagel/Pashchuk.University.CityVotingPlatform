@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'city_voting_registration',
     'city_map',
+    'homepage',
 ]
 
 MIDDLEWARE = [
