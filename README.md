@@ -23,6 +23,7 @@ City Voting Platform is the best desicion for goverment of a small city to conne
 ### Features
 - User Authentication with Google account.
 - Welcome Email upon registration.
+- Project Voting System
 - Coming soon.
 
 ### Architecture
@@ -47,9 +48,9 @@ Week 2 (03/06 - 03/13):
 5. Set up Continuous Integration/Continuous Delivery (CI/CD) pipeline ✔️
 
 Week 3 (03/13 - 03/20):
-1. Implement feature: Project Voting functionality
+1. Implement feature: Project Voting functionality ✔️
 2. Design database schema for projects and user data
 3. Implement backend services for project management
 4. Write unit tests for authentication and project services
-5. Refine CI/CD pipeline for automated testing
+5. Refine CI/CD pipeline for automated testing ✔️
 
