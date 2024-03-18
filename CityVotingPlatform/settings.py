@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'city_voting_registration',
     'city_map',
     'homepage',
+    'voting',
 ]
 
 MIDDLEWARE = [
