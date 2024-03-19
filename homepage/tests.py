@@ -39,3 +39,4 @@ class ViewsTestCase(TestCase):
         self.assertTemplateUsed(response, 'homepage/profile.html')
         # Check if the username context variable is None
         self.assertIsNone(response.context['username'])
+
