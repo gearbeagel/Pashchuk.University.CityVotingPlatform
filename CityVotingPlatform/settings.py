@@ -1,10 +1,11 @@
 from pathlib import Path
+
+from django.contrib import staticfiles
 from dotenv import load_dotenv
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -17,7 +18,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['cityvoting.azurewebsites.net', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://cityvoting.azurewebsites.net']
-
 
 # Application definition
 
@@ -70,17 +70,17 @@ TEMPLATES = [
     },
 ]
 
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
 }
 STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
-STATIC_URL = STATIC_HOST + "/static/"
+STATIC_URL = "/static/"
+STATICFILES_DIRS = [BASE_DIR / "static",]
 
 WSGI_APPLICATION = 'CityVotingPlatform.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -91,7 +91,6 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -111,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.0/topics/i18n/
 
@@ -122,7 +120,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -141,7 +138,7 @@ SOCIALACCOUNT_LOGIN_ON_GET = True
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
-    ]
+]
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -169,5 +166,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'vebvebenko@gmail.com'
 EMAIL_HOST_PASSWORD = passwrd
 EMAIL_USE_TLS = True
-
-

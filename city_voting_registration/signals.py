@@ -20,5 +20,5 @@ def check_new_user(sender, instance, created, **kwargs):
 @receiver(user_logged_in)
 def send_welcome_email_if_new(sender, request, user, **kwargs):
     if (getattr(user, '_newly_created') and
-            request.user.backend == 'allauth.account.auth_backends.AuthenticationBackend'):
+            user.backend == 'allauth.account.auth_backends.AuthenticationBackend'):
         welcome_email(request)
