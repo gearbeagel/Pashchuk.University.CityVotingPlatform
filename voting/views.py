@@ -10,7 +10,7 @@ from .models import Project, Vote, UserChoice
 def overall_info(request):
     latest_project_list = Project.objects.order_by('-pub_date')[:4]
     context = {'latest_project_list': latest_project_list}
-    return render(request, 'city_voting/overall_info.html', context)
+    return render(request, 'voting/overall_info.html', context)
 
 
 # Show specific project data and votes
