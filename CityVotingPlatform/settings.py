@@ -78,7 +78,7 @@ STORAGES = {
 }
 STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
 STATIC_URL = "/static/"
-STATICFILES_DIRS = [BASE_DIR / "static",]
+STATICFILES_DIRS = [BASE_DIR / "static", ]
 
 WSGI_APPLICATION = 'CityVotingPlatform.wsgi.application'
 
