@@ -8,7 +8,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('city_voting', '0001_initial'),
+        ('voting', '0001_initial'),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
@@ -21,9 +21,9 @@ class Migration(migrations.Migration):
             name='UserChoice',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='city_voting.project')),
+                ('project', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='voting.project')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-                ('vote', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='city_voting.vote')),
+                ('vote', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='voting.vote')),
             ],
             options={
                 'unique_together': {('user', 'project')},

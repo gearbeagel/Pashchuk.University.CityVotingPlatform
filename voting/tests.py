@@ -15,7 +15,7 @@ class VotingViewTests(TestCase):
         url = reverse('overall_info')
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'city_voting/overall_info.html')
+        self.assertTemplateUsed(response, 'voting/overall_info.html')
 
     def test_detail_view(self):
         user = User.objects.create_user(username='testuser', password='testpassword')
@@ -23,7 +23,7 @@ class VotingViewTests(TestCase):
         url = reverse('detail', args=(self.project.id,))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'city_voting/detail.html')
+        self.assertTemplateUsed(response, 'voting/detail.html')
 
     def test_results_view(self):
         user = User.objects.create_user(username='testuser', password='testpassword')
@@ -31,7 +31,7 @@ class VotingViewTests(TestCase):
         url = reverse('results', args=(self.project.id,))
         response = self.client.get(url)
         self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'city_voting/results.html')
+        self.assertTemplateUsed(response, 'voting/results.html')
 
     def test_vote_view(self):
         user = User.objects.create_user(username='testuser', password='testpassword')

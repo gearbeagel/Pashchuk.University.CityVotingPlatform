@@ -6,6 +6,6 @@ urlpatterns = [
     path('accounts/', include("allauth.urls")),
     path('', include('city_voting_registration.urls')),
     path('', include('city_map.urls')),
-    path('', include('city_user_management.urls')),
-    path('polls/', include('city_voting.urls')),
+    path('', include('homepage.urls')),
+    path('polls/', include('voting.urls')),
 ]
