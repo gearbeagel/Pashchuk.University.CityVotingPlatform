@@ -19,13 +19,13 @@ def detail(request, project_id):
         project = Project.objects.get(pk=project_id)
     except Project.DoesNotExist:
         raise Http404("Question does not exist")
-    return render(request, 'city_voting/detail.html', {'project': project})
+    return render(request, 'voting/detail.html', {'project': project})
 
 
 # Get project data and display results
 def results(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
-    return render(request, 'city_voting/results.html', {'project': project})
+    return render(request, 'voting/results.html', {'project': project})
 
 
 # Vote for a project
@@ -34,12 +34,12 @@ def vote(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     user = request.user
     if UserChoice.objects.filter(user=user, project=project).exists():
-        return render(request, 'city_voting/detail.html',
+        return render(request, 'voting/detail.html',
                       {'project': project, 'error_message': 'You have already voted for this project.'})
     try:
         selected_choice = project.vote_set.get(pk=request.POST['vote'])
     except (KeyError, Vote.DoesNotExist):
-        return render(request, 'city_voting/detail.html',
+        return render(request, 'voting/detail.html',
                       {'project': project,
                        'error_message': 'You did not select a choice.'})
     else:
