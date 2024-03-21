@@ -7,7 +7,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Home</title>
-    <link rel="stylesheet" href="{% static 'homepage_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/homepage_style.css' %}">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=Rethink+Sans&display=swap" rel="stylesheet">
@@ -30,7 +30,7 @@
     </header>
     <main>
         {% block content %}
-        	
+            {% include 'homepage/projects.html' %}
         {% endblock %}
     </main>
 </body>

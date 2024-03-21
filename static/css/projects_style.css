@@ -1,0 +1,78 @@
+.project-container {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f6f6f7;;
+    margin: 0;
+    padding: 0;
+}
+
+.project-header {
+    background-color: #f6f6f7;;
+    color: black;
+    text-align: center;
+    padding: 20px 0;
+}
+
+.project-content {
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.project-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 48%;
+    flex-grow: 1;
+}
+
+.project-card:nth-child(even) {
+    order: 1;
+}
+
+.project-card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.project-card-text {
+    color: #666;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 100px; /* Set a maximum height for the description */
+    transition: max-height 0.3s ease; /* Smooth transition for height change */
+}
+
+.project-card-text.expanded {
+    max-height: none; /* Expand description to show full text */
+}
+.project-card-title {
+    font-size: 24px;
+    margin-bottom: 10px;
+    word-wrap: break-word; /* Ensure project names do not overflow */
+}
+
+.project-card-text {
+    color: #666;
+    word-wrap: break-word; /* Ensure descriptions do not overflow */
+}
+.no-projects {
+    text-align: center;
+    color: #666;
+}
+
+.show-more-btn {
+    background-color: #1a2039;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    margin-top: 10px;
+    border-radius: 5px;
+}
