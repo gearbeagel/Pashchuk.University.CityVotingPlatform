@@ -15,7 +15,7 @@ class ViewsTestCase(TestCase):
         # Check if the response status code is 200 (OK)
         self.assertEqual(response.status_code, 200)
         # Check if the correct template is used
-        self.assertTemplateUsed(response, 'homepage.html')
+        self.assertTemplateUsed(response, 'homepage/homepage.html')
 
     def test_profile_view_authenticated(self):
         # Create a test user and log in
