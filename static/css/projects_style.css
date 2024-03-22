@@ -1,12 +1,12 @@
 .project-container {
     font-family: 'Montserrat', sans-serif;
-    background-color: #f6f6f7;;
+    background-color: #f6f6f7;
     margin: 0;
     padding: 0;
 }
 
 .project-header {
-    background-color: #f6f6f7;;
+    background-color: #f6f6f7;
     color: black;
     text-align: center;
     padding: 20px 0;
@@ -31,36 +31,31 @@
     flex-grow: 1;
 }
 
-.project-card:nth-child(even) {
-    order: 1;
-}
-
-.project-card-title {
-    font-size: 24px;
-    margin-bottom: 10px;
+.project-card-text-container {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 10;
 }
 
 .project-card-text {
-    color: #666;
+    color: black;
     word-wrap: break-word;
     overflow: hidden;
-    max-height: 100px; /* Set a maximum height for the description */
-    transition: max-height 0.3s ease; /* Smooth transition for height change */
+    max-height: 110px;
+    transition: max-height 0.3s ease;
 }
 
 .project-card-text.expanded {
-    max-height: none; /* Expand description to show full text */
-}
-.project-card-title {
-    font-size: 24px;
-    margin-bottom: 10px;
-    word-wrap: break-word; /* Ensure project names do not overflow */
+    max-height: none;
 }
 
-.project-card-text {
-    color: #666;
-    word-wrap: break-word; /* Ensure descriptions do not overflow */
+.project-card-title {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
 }
+
 .no-projects {
     text-align: center;
     color: #666;
@@ -73,6 +68,16 @@
     padding: 5px 10px;
     cursor: pointer;
     outline: none;
-    margin-top: 10px;
+    margin-top: auto;
     border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+    .project-card {
+        width: 100%;
+    }
+
+    .project-card-text {
+        max-height: none;
+    }
 }

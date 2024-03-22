@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/projects_style.css' %}">
 </head>
 <body>
@@ -20,9 +21,8 @@
                         <p class="project-upload-date">Uploaded on: {{ project.pub_date }}</p>
                         <div class="project-card-text-container">
                             <p class="project-card-text">{{ project.description }}</p>
-                            {% if project.description|length > 100 %}
+                            {% if project.description|length > 700 %}
                                 <button class="show-more-btn">Show more</button>
-                                <div class="fade-out"></div> <!-- Fade-out overlay -->
                             {% endif %}
                         </div>
                     </div>
