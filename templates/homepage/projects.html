@@ -13,12 +13,15 @@
         <header class="project-header">
             <h1>Recently uploaded projects</h1>
         </header>
-        <div class="project-content">
-            {% if projects %}
-                {% for project in projects %}
+        {% if projects %}
+            {% for project in projects %}
+                <div class="project-content">
                     <div class="project-card">
-                        <h2 class="project-card-title">{{ project.name }}</h2>
-                        <p class="project-upload-date">Uploaded on: {{ project.pub_date }}</p>
+                        <h2 class="project-card-title" onclick="redirectToDetailPage({{ project.id }})">{{ project.name }}</h2>
+                        <div class="project-metadata">
+                            <p class="project-id">№ {{ project.id }}</p>
+                            <p class="project-upload-date">Uploaded on: {{ project.pub_date }}</p>
+                        </div>
                         <div class="project-card-text-container">
                             <p class="project-card-text">{{ project.description }}</p>
                             {% if project.description|length > 700 %}
@@ -26,12 +29,13 @@
                             {% endif %}
                         </div>
                     </div>
-                {% endfor %}
-            {% else %}
-                <p class="no-projects">No projects available</p>
-            {% endif %}
-        </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-projects">No projects available :(</div>
+        {% endif %}
     </div>
+    <script src="{% static 'js/project_redirect.js' %}"></script>
     <script src="{% static 'js/projects_description.js' %}"></script>
 </body>
 </html>

@@ -7,5 +7,5 @@ urlpatterns = [
     path('', include('city_voting_registration.urls')),
     path('', include('city_map.urls')),
     path('', include('homepage.urls')),
-    path('polls/', include('voting.urls')),
+    path('projects/', include('voting.urls')),
 ]

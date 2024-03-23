@@ -1,23 +1,57 @@
 {% extends 'homepage/homepage.html' %}
+{% load static %}
 {% block content %}
-<a class="btn btn-secondary btn-sm mb-3" href="{% url 'overall_info' %}">Back To Polls</a>
-<h1 class="text-center mb-3">{{ project.name }}</h1>
-
-{% if error_message %}
-<p class="alert alert-danger">
-    <strong>{{ error_message }}</strong>
-</p>
-{% endif %}
-
-<form action="{% url 'vote' project.id %}" method="post">
-    {% csrf_token %}
-    {% for choice in project.vote_set.all %}
-    <div class="form-check">
-        <input type="radio" name="vote" class="form-check-input" id="choice{{ forloop.counter }}"
-            value="{{ choice.id }}" />
-        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+<link rel="stylesheet" href="{% static 'css/detail_style.css' %}">
+<div class="project-container">
+<div class="project-content">
+    <h2 class="project-card-title">{{ project.name }}</h2>
+    <div class="project-metadata">
+        <p class="project-id">№ {{ project.id }}</p>
+        <p class="project-upload-date">Uploaded on: {{ project.pub_date }}</p>
     </div>
-    {% endfor %}
-    <input type="submit" value="Vote" class="btn btn-success btn-lg btn-block mt-4" />
-</form>
+    <div class="project-card-text-container">
+        <p class="project-card-text">{{ project.description }}</p>
+    </div>
+    {% if user_voted %}
+     <div class="alert alert-success"></div>
+        <h3>Results:</h3>
+        <ul class="list-group">
+        {% for choice in project.vote_set.all %}
+            <li class="list-group-item">
+                {{ choice.choice_text }}: <span class="badge badge-success float-right">{{ choice.votes }}
+                    vote{{ choice.votes | pluralize }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+    <form action="{% url 'vote' project.id %}" method="post">
+        {% csrf_token %}
+        {% for choice in project.vote_set.all %}
+        <div class="form-check">
+            <input type="radio" name="vote" class="form-check-input" id="choice{{ forloop.counter }}"
+                value="{{ choice.id }}" />
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+        </div>
+        {% endfor %}
+        <input type="submit" value="Vote" class="btn btn-success btn-lg btn-block mt-4" />
+    </form>
+    {% endif %}
+</div>
+</div>
+    {% if error_message %}
+<div class="notification-container" data-duration="3000">
+    <div class="notification">
+        <span class="close-btn" onclick="closeNotification()">×</span>
+        <p>{{ error_message }}</p>
+    </div>
+</div>
+    {% elif success_message %}
+<div class="notification-container" data-duration="3000">
+    <div class="notification success">
+        <span class="close-btn" onclick="closeNotification()">×</span>
+        <p>{{ success_message }}</p>
+    </div>
+</div>
+{% endif %}
+<script src="{% static 'js/notification.js' %}"></script>
 {% endblock %}

@@ -1,0 +1,157 @@
+.project-container {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f6f6f7;
+    margin: 20px auto; /* Adjust margin as needed */
+    padding: 20px 20px 0 20px;
+    max-width: 800px; /* Adjust max-width as needed */
+    border-radius: 10px; /* Rounded corners for the box */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+}
+
+.project-content {
+    max-width: 2000px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding-bottom: 0;
+}
+
+.project-card-title {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 10px;
+    margin-top: 0;
+    text-align: center;
+    cursor: default;
+}
+
+.project-metadata {
+    font-family: 'Roboto Slab', serif;
+    margin-top: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.project-id {
+    font-weight: bold;
+    color: white;
+    padding: 2px 6px;
+    background-color: #1a2039;
+    border-radius: 3px;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.project-upload-date{
+    font-weight: normal;
+    color: #9c9faf;
+    margin-bottom: 12px;
+}
+
+.project-card-text-container {
+    font-family: 'Roboto Slab', serif;
+    margin-bottom: 20px;
+    width: 100%; /* Ensure the description takes full width */
+}
+
+.project-card-text {
+    color: black;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 110px;
+    transition: max-height 0.3s ease;
+}
+
+.form-check {
+    margin-bottom: 10px;
+}
+
+.btn-back-to-homepage {
+    margin-top: 20px;
+    display: block;
+}
+
+.alert {
+    margin-top: 20px;
+}
+
+/* Styling for form-check (checkboxes) */
+.form-check {
+    margin-bottom: 10px;
+}
+
+/* Styling for checkboxes */
+.form-check-input[type="radio"] {
+    cursor: pointer; /* Change cursor to pointer when hovering over radio buttons */
+}
+
+/* Styling for checkbox labels */
+.form-check-label {
+    cursor: pointer; /* Change cursor to pointer when hovering over checkbox labels */
+}
+
+/* Styling for vote button */
+input[type="submit"].btn-success {
+    cursor: pointer; /* Change cursor to pointer when hovering over vote button */
+    display: inline-block;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #1a2039;
+    color: #fff;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+/* Change button background color on hover */
+input[type="submit"].btn-success:hover {
+    background-color: #d9d8da;
+    color: black;
+}
+
+.notification-container {
+    position: fixed;
+    top: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    max-width: 600px;
+    background-color: #f44336;
+    color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+.notification {
+    background-color: #f44336; /* Red background color */
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.notification p {
+    margin: 0;
+}
+
+.close-btn {
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+}
+
+.notification.success {
+    background-color: #4caf50;
+}
+
+.notification.success .close-btn {
+    color: white;
+}
+
+
