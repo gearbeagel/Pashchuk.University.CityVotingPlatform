@@ -12,12 +12,19 @@
     <div class="project-container">
         <header class="project-header">
             <h1>Recently uploaded projects</h1>
+            {% if not user.is_authenticated %}
+            <h2 class="project-disclaimer">Login to access more content</h2>
+            {% endif %}
         </header>
         {% if projects %}
             {% for project in projects %}
                 <div class="project-content">
                     <div class="project-card">
-                        <h2 class="project-card-title" onclick="redirectToDetailPage({{ project.id }})">{{ project.name }}</h2>
+                    {% if not user.is_authenticated %}
+                        <h2 class="project-card-title not-authenticated">{{ project.name }}</h2>
+                    {% else %}
+                        <h2 class="project-card-title authenticated" onclick="redirectToDetailPage({{ project.id }})">{{ project.name }}</h2>
+                    {% endif %}
                         <div class="project-metadata">
                             <p class="project-id">№ {{ project.id }}</p>
                             <p class="project-upload-date">Uploaded on: {{ project.pub_date }}</p>
