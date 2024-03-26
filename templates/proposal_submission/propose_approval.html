@@ -1,0 +1,71 @@
+{% extends 'homepage/homepage.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proposal Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/projects_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/notification_style.css' %}">
+</head>
+<body>
+    <div class="project-container">
+        <header class="project-header">
+            <h1>Recently proposed projects</h1>
+        </header>
+        {% if proposal_projects %}
+            {% for project in proposal_projects %}
+                <div class="project-content">
+                    <div class="project-card">
+                        <h2 class="project-card-title">{{ project.name }}</h2>
+                        <div class="project-metadata">
+                            <p class="project-id">№ {{ project.id }}</p>
+                        </div>
+                        <div class="project-card-text-container">
+                            <p class="project-card-text">{{ project.description }}</p>
+                            {% if project.description|length > 700 %}
+                                <button class="show-more-btn">Show more</button>
+                            {% endif %}
+                        </div>
+                        <div class="approval-rejection">
+                        <form method="post" action="{% url 'approve_proposal' project.id %}">
+                            {% csrf_token %}
+                            <button class="action-button" type="submit" name="action" value="approve">
+                                ✔️
+                            </button>
+                            <button class="action-button" type="submit" name="action" value="reject">
+                                ❌
+                            </button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-projects">There are no new proposals :(</div>
+        {% endif %}
+    </div>
+    {% if fail_message %}
+<div class="notification-container" data-duration="3000">
+    <div class="notification">
+        <span class="close-btn" onclick="closeNotification()">×</span>
+        <p>{{ fail_message }}</p>
+    </div>
+</div>
+    {% elif success_message %}
+<div class="notification-container" data-duration="3000">
+    <div class="notification success">
+        <span class="close-btn" onclick="closeNotification()">×</span>
+        <p>{{ success_message }}</p>
+    </div>
+</div>
+{% endif %}
+    <script src="{% static 'js/projects_description.js' %}"></script>
+    <script src="{% static 'js/notification.js' %}"></script>
+</body>
+</html>
+
+{% endblock %}

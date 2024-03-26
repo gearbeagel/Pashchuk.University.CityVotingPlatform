@@ -8,4 +8,5 @@ urlpatterns = [
     path('', include('city_map.urls')),
     path('', include('homepage.urls')),
     path('projects/', include('voting.urls')),
+    path('proposal/', include('user_submissions.urls')),
 ]

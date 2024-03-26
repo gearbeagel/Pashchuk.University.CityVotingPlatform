@@ -18,6 +18,11 @@
                     {% if user.is_authenticated %}
                         <a href="/profile">Profile</a>
                         <a href="{% url 'logout_view' %}">Logout</a>
+                        {% if user.is_staff %}
+                            <a href={% url 'proposals' %}>View Proposals</a>
+                        {% else %}
+                            <a href="{% url 'submit_proposal' %}">Propose</a>
+                        {% endif %}
                     {% else %}
                         <a href="{% provider_login_url 'google'%}?next=/">Login/Register with Google</a>
                     {% endif %}
@@ -26,9 +31,7 @@
             </div>
     </header>
     <main>
-        {% block content %}
-            {% include 'homepage/projects.html' %}
-        {% endblock %}
+        {% block content %} {% endblock %}
     </main>
 </body>
 </html>

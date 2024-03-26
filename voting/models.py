@@ -12,6 +12,11 @@ class Project(models.Model):
     def __str__(self):
         return self.name
 
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        Vote.objects.create(project=self, choice_text='Approve')
+        Vote.objects.create(project=self, choice_text='Disapprove')
+
 
 # Vote class
 class Vote(models.Model):

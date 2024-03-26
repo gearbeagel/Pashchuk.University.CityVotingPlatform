@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'city_map',
     'homepage',
     'voting',
+    'user_submissions',
 ]
 
 MIDDLEWARE = [
@@ -158,6 +159,7 @@ SOCIALACCOUNT_PROVIDERS = {
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+LOGIN_URL = '/'
 # Welcome email configurations
 load_dotenv('.env')
 passwrd: str = os.getenv('passwrd')
