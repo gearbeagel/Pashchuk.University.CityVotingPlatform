@@ -55,9 +55,9 @@ Week 3 (03/13 - 03/20):
 5. Refine CI/CD pipeline for automated testing ✔️
 
 Week 4 (03/20 - 03/27):
-1. Implement feature: Proposal Submission
-2. Develop project view functionality
-3. Design frontend components for user interaction
-4. Perform integration testing for user authentication and project functionalities
+1. Implement feature: Proposal Submission ✔️
+2. Develop project view functionality ✔️
+3. Design frontend components for user interaction ✔️
+4. Perform integration testing for user authentication and project functionalities ✔️
 5. Update project documentation with architecture diagram
 

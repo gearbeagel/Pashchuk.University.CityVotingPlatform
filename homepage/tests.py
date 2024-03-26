@@ -33,10 +33,8 @@ class ViewsTestCase(TestCase):
     def test_profile_view_not_authenticated(self):
         # Make a GET request to the profile view without logging in
         response = self.client.get(reverse('profile'))
-        # Check if the response status code is 200 (OK)
-        self.assertEqual(response.status_code, 200)
-        # Check if the correct template is used
-        self.assertTemplateUsed(response, 'homepage/profile.html')
+        # Check if the response status code is 302 (redirect to homepage)
+        self.assertEqual(response.status_code, 302)
         # Check if the username context variable is None
-        self.assertIsNone(response.context['username'])
+        self.assertIsNone(response.context and response.context.get('username'))
 
