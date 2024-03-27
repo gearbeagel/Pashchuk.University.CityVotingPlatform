@@ -29,7 +29,7 @@ City Voting Platform is the best desicion for goverment of a small city to conne
 
 ### Architecture
 The City Voting Platform app follows a client-server architecture. The client-side is built using HTML, CSS, and Jinja, while the server-side is implemented with Django.
-![Architecture diagram](Architecture diagram.png "Architecture diagram") 
+![Architecture_diagram.png](Architecture_diagram.png "Architecture diagram") 
 
 ### Usage
 To become a part of city's community, simply register or sign in with your Google account. Then, you can access different projects, choose the most interesting ones and help them to become a reality.
