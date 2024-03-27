@@ -23,11 +23,13 @@ City Voting Platform is the best desicion for goverment of a small city to conne
 ### Features
 - User Authentication with Google account.
 - Welcome Email upon registration.
-- Project Voting System
+- Project Voting System.
+- Proposal Submission.
 - Coming soon.
 
 ### Architecture
 The City Voting Platform app follows a client-server architecture. The client-side is built using HTML, CSS, and Jinja, while the server-side is implemented with Django.
+![Architecture diagram](Architecture diagram.png "Architecture diagram") 
 
 ### Usage
 To become a part of city's community, simply register or sign in with your Google account. Then, you can access different projects, choose the most interesting ones and help them to become a reality.
@@ -59,5 +61,5 @@ Week 4 (03/20 - 03/27):
 2. Develop project view functionality ✔️
 3. Design frontend components for user interaction ✔️
 4. Perform integration testing for user authentication and project functionalities ✔️
-5. Update project documentation with architecture diagram
+5. Update project documentation with architecture diagram ✔️
 
