@@ -25,6 +25,7 @@ City Voting Platform is the best desicion for goverment of a small city to conne
 - Welcome Email upon registration.
 - Project Voting System.
 - Proposal Submission.
+- Commenting system.
 - Coming soon.
 
 ### Architecture
@@ -62,4 +63,11 @@ Week 4 (03/20 - 03/27):
 3. Design frontend components for user interaction ✔️
 4. Perform integration testing for user authentication and project functionalities ✔️
 5. Update project documentation with architecture diagram ✔️
+
+Week 5 (03/27 - 04/03):
+1. Implement feature: Commenting System ✔️
+2. Develop backend logic for commenting ✔️
+3. Design UI for commenting feature ✔️
+4. Integrate commenting system with existing project views ✔️
+5. Test commenting system for functionality and performance
 

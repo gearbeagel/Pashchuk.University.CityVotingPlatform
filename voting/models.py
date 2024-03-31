@@ -28,6 +28,17 @@ class Vote(models.Model):
         return self.choice_text
 
 
+# Comment class
+class Comment(models.Model):
+    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    comment_text = models.TextField()
+    pub_date = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return f'Comment by {self.user.username} on {self.project.name}'
+
+
 # User Choice class to associate users with their votes for each project
 class UserChoice(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
