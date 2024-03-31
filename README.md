@@ -69,5 +69,12 @@ Week 5 (03/27 - 04/03):
 2. Develop backend logic for commenting ✔️
 3. Design UI for commenting feature ✔️
 4. Integrate commenting system with existing project views ✔️
-5. Test commenting system for functionality and performance
+5. Test commenting system for functionality and performance ✔️
+
+Week 6 (04/03 - 04/10):
+1. Implement feature: User Profile Management
+2. Develop user profile CRUD operations
+3. Design user profile UI components
+4. Integrate user profile management with authentication system
+5. Test user profile functionality and UI interactions
 
