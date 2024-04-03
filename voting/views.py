@@ -4,6 +4,7 @@ from django.http import Http404
 from django.contrib import messages
 
 from .models import Project, Vote, UserChoice, Comment
+from homepage.models import ImageStorage
 
 
 # Show specific project data and votes
@@ -13,6 +14,10 @@ def detail(request, project_id):
     user_voted = UserChoice.objects.filter(user=user, project=project)
     comments = Comment.objects.filter(project=project)
     comments = comments.order_by('-pub_date')
+    img_object = ImageStorage.objects.filter(user=user).first()
+    profile_picture = None
+    if img_object:
+        profile_picture = img_object.profile_picture
     error_message = None
     success_message = None
     for message in messages.get_messages(request):
@@ -28,21 +33,22 @@ def detail(request, project_id):
         if error_message:
             return render(request, 'voting/detail.html',
                           {'project': project, 'user_voted': user_voted, 'comments': comments,
-                           'error_message': error_message})
+                           'error_message': error_message, 'profile_picture': profile_picture})
         elif success_message:
             return render(request, 'voting/detail.html',
                           {'project': project, 'user_voted': user_voted, 'comments': comments,
-                           'success_message': success_message})
+                           'success_message': success_message, 'profile_picture': profile_picture})
         else:
             return render(request, 'voting/detail.html',
-                          {'project': project, 'user_voted': user_voted, 'comments': comments})
+                          {'project': project, 'user_voted': user_voted, 'comments': comments, 'profile_picture': profile_picture})
     else:
         if error_message:
             return render(request, 'voting/detail.html',
                           {'project': project, 'user_voted': user_voted, 'comments': comments,
-                           'error_message': error_message})
+                           'error_message': error_message, 'profile_picture': profile_picture})
         else:
-            return render(request, 'voting/detail.html', {'project': project, 'comments': comments})
+            return render(request, 'voting/detail.html',
+                          {'project': project, 'comments': comments, 'profile_picture': profile_picture})
 
 
 # Vote for a project

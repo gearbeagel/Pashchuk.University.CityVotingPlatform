@@ -54,7 +54,17 @@
     <ul class="all_comments">
         {% for comment in comments %}
         <li class="comment">
-            <span class="comment-username" onclick="replyTo('{{ comment.user.username }}')">{{ comment.user.username }}</span>: {{ comment.comment_text }}
+            <div class="comment-header">
+                <div class="profile-picture-container">
+                    {% if profile_pictures.comment.user.username %}
+                    <img src="{{ profile_pictures.comment.user.username.url }}" alt="Profile Picture" class="profile-picture">
+                    {% else %}
+                    <img src="{% static 'images/default_profile_picture.png' %}" alt="Default Profile Picture" class="profile-picture">
+                    {% endif %}
+                </div>
+                <span class="comment-username" onclick="replyTo('{{ comment.user.username }}')">{{ comment.user.username }}:</span>
+                <p class="comment-text">{{ comment.comment_text }}</p>
+            </div>
         </li>
         {% endfor %}
     </ul>
