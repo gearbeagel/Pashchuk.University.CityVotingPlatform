@@ -1,6 +1,8 @@
+from azure.storage.blob import BlobServiceClient
 from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
+import os
 
 from .models import ImageStorage
 from .forms import ProfilePictureForm
@@ -14,9 +16,18 @@ def home(request):
 
 @login_required
 def profile(request):
-    profile_picture_object = ImageStorage.objects.filter(user=request.user).first()
-    profile_picture = profile_picture_object.profile_picture if profile_picture_object else None
+    azure_storage_connection_string = os.getenv("connection_str")
+    container_name = "profpicscont"
+    userpic = ImageStorage.objects.filter(user=request.user).first()
+    if not userpic:
+        userpic = ImageStorage.objects.create(user=request.user)
+        userpic.save()
+    blob_name = userpic.profile_picture
 
+    blob_service_client = BlobServiceClient.from_connection_string(azure_storage_connection_string)
+    blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
+
+    profile_picture = blob_client.url
     context = {'profile_picture': profile_picture}
 
     for message in messages.get_messages(request):
@@ -46,8 +57,10 @@ def update_username(request):
 @login_required
 def update_profile_picture(request):
     if request.method == 'POST':
-        profile_picture = request.FILES.get('new_profile_picture')
-        if profile_picture:
+        form = ProfilePictureForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.instance.container_name = 'profpicscont'
+            profile_picture = form.cleaned_data['profile_picture']
             existing_image = ImageStorage.objects.filter(user=request.user).first()
             if existing_image:
                 existing_image.profile_picture.delete()
@@ -58,8 +71,8 @@ def update_profile_picture(request):
             messages.success(request, 'Profile picture has been changed.')
             return redirect('profile')
         else:
-            messages.error(request, "No profile picture uploaded. Please choose a file.")
+            messages.error(request, 'Error updating profile picture. Please try again.')
             return redirect('profile')
     else:
-        form = ProfilePictureForm()
-        return render(request, 'homepage/profile.html', {'form': form})
+        return redirect('profile')
+

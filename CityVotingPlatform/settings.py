@@ -1,4 +1,6 @@
+import sys
 from pathlib import Path
+import environ
 
 from django.contrib import staticfiles
 from dotenv import load_dotenv
@@ -7,11 +9,11 @@ import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
+load_dotenv('.env')
+secret_key: str = os.getenv('secret_key')
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-irmqc@66c6ti_c)-g065*wkghwlx(y3go6k6n6q)g37c_waei!'
+SECRET_KEY = secret_key
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -72,16 +74,24 @@ TEMPLATES = [
         },
     },
 ]
-
+storage_key: str = os.getenv('storage_key')
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_config")
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
     },
     "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+        'BACKEND': 'storages.backends.azure_storage.AzureStorage',
+        'AZURE_ACCOUNT_NAME': 'cityvotingstorageaccount',
+        'AZURE_ACCOUNT_KEY': storage_key,
+        'AZURE_CONTAINER': 'profpicscont',
     },
 }
+
+AZURE_ACCOUNT_NAME = 'cityvotingstorageaccount'
+AZURE_ACCOUNT_KEY = storage_key
+AZURE_CONTAINER = 'profpicscont'
+
 STATIC_HOST = os.environ.get("DJANGO_STATIC_HOST", "")
 STATIC_URL = "/static/"
 STATICFILES_DIRS = [BASE_DIR / "static", ]
@@ -92,17 +102,29 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 # Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
+db_password: str = os.getenv('db_password')
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+environ.Env.DB_SCHEMES['mssql'] = 'mssql'
+env = environ.Env(DEBUG=(bool, False))
+DEFAULT_DATABASE_URL = (
+    f'mssql://krato:{db_password}@citivoting-db-server.database.windows.net/cityvoting_db?driver=ODBC'
+    '+Driver+17+for+SQL+Server')
+
+DATABASE_URL = os.environ.get('DATABASE_URL', DEFAULT_DATABASE_URL)
+os.environ['DJANGO_DATABASE_URL'] = DATABASE_URL.format(**os.environ)
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': ':memory:',
+        }
     }
-}
-
+else:
+    DATABASES = {
+        'default': env.db('DJANGO_DATABASE_URL', default=DEFAULT_DATABASE_URL)
+    }
 # Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -139,7 +161,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Site ID
-SITE_ID = 3
+SITE_ID = 4
 
 # Social authentication settings
 SOCIALACCOUNT_LOGIN_ON_GET = True
@@ -167,7 +189,6 @@ LOGOUT_REDIRECT_URL = '/'
 
 LOGIN_URL = '/'
 # Welcome email configurations
-load_dotenv('.env')
 passwrd: str = os.getenv('passwrd')
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

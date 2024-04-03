@@ -4,4 +4,4 @@ from django.db import models
 
 class ImageStorage(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    profile_picture = models.ImageField(null=True, blank=True, upload_to='images/')
+    profile_picture = models.ImageField(default='default_profile_picture.png', blank=True, upload_to='images/')

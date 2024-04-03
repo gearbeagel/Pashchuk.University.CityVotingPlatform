@@ -21,11 +21,7 @@
     </div>
 <div class="content">
     <div class="profile-picture">
-        {% if profile_picture %}
-            <img src="{{ profile_picture.url }}" alt="Profile Picture">
-        {% else %}
-            <img src="{% static 'images/default_profile_picture.png' %}" alt="Default Profile Picture">
-        {% endif %}
+        <img src="{{ profile_picture }}" alt="Profile Picture">
     </div>
     <p>Username: <span id="username">{{ user.username }}</span> <a href="#" id="change-username-link">Change</a></p>
     <div id="username-form-container" style="display: none;">
@@ -37,10 +33,10 @@
         </form>
     </div>
     <p>Email: <span id="email">{{ user.email }}</span></p>
-    <form id="profile-picture-form" action="update_profile_picture/" method="post" enctype="multipart/form-data">
+    <form id="profile-picture-form" action="{% url 'update_profile_picture' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         <label for="new-profile-picture">New Profile Picture:</label>
-        <input type="file" id="new-profile-picture" name="new_profile_picture">
+        <input type="file" id="new-profile-picture" name="profile_picture">
         <button type="submit">Change Profile Picture</button>
     </form>
 </div>
