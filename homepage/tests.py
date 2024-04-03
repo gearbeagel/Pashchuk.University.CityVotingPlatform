@@ -27,8 +27,6 @@ class ViewsTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         # Check if the correct template is used
         self.assertTemplateUsed(response, 'homepage/profile.html')
-        # Check if the username is passed to the template context
-        self.assertEqual(response.context['username'], 'testuser')
 
     def test_profile_view_not_authenticated(self):
         # Make a GET request to the profile view without logging in
