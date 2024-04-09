@@ -63,7 +63,8 @@ def update_profile_picture(request):
             profile_picture = form.cleaned_data['profile_picture']
             existing_image = ImageStorage.objects.filter(user=request.user).first()
             if existing_image:
-                existing_image.profile_picture.delete()
+                if existing_image.profile_picture != 'default_profile_picture.png':
+                    existing_image.profile_picture.delete()
                 existing_image.profile_picture = profile_picture
                 existing_image.save()
             else:
