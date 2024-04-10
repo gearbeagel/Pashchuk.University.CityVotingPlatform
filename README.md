@@ -18,7 +18,7 @@ To run the project, follow next steps:
 
 ## Documentation
 ### Introduction
-City Voting Platform is the best desicion for goverment of a small city to connect with society in order to create better place for all to live in. Using user-friendly interface and a variety of instruments people can allocate funds to different city projects, communicate with each other and much more!
+City Voting Platform is the best decision for government of a small city to connect with society in order to create better place for all to live in. Using user-friendly interface and a variety of instruments people can allocate funds to different city projects, communicate with each other and much more!
 
 ### Features
 - User Authentication with Google account.
@@ -26,6 +26,7 @@ City Voting Platform is the best desicion for goverment of a small city to conne
 - Project Voting System.
 - Proposal Submission.
 - Commenting system.
+- User Profile Management.
 - Coming soon.
 
 ### Architecture
