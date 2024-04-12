@@ -12,3 +12,4 @@ urlpatterns = [
     path('projects/', include('voting.urls')),
     path('proposal/', include('user_submissions.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
