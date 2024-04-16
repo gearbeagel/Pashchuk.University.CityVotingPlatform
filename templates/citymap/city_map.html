@@ -1,40 +1,61 @@
 {% extends 'homepage/homepage.html' %}
+{% load static %}
 
 {% block content %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>City map by districts</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f2f2f2;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        .image-container {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .image-container img {
-            max-width: 100%;
-            border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-    </style>
+    <title>Lviv Choropleth Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="{% static 'css/map_style.css' %}">
 </head>
 <body>
-    <div class="container">
-        <h1 style="text-align: center;">City map by districts</h1>
-        <div class="image-container">
-            <img src="https://lviv1256.com/wp-content/uploads/2019/02/1363619.jpg" alt="City Map">
-        </div>
-    </div>
+    <div id="map"></div>
+    <div id="district-info-container"></div>
+    <script>
+        const map = L.map('map', {
+            dragging: false,
+            scrollWheelZoom: false,
+            maxZoom: 11,
+            minZoom: 11
+        }).setView([49.842957, 24.031111], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var districtsData = {% include 'citymap/dist_json.json' %};
+
+        districtsData.forEach(function(districtData) {
+            const coordinates = districtData.coordinates.map(function (point) {
+                return [point.lat, point.lon];
+            });
+            const districtBoundary = L.polygon(coordinates, {
+                fillColor: 'darkblue',
+                fillOpacity: 0.5,
+                color: 'darkblue',
+                weight: 2
+            }).addTo(map);
+            districtBoundary.bindPopup(districtData.name);
+
+            districtBoundary.on('click', function (e) {
+                document.getElementById('district-info-container').innerHTML = '';
+                document.getElementById('district-info-container').innerHTML = '<h3>' + districtData.name + ':</h3>';
+            });
+
+            districtBoundary.on('mouseover', function (e) {
+                districtBoundary.setStyle({
+                    fillOpacity: 1
+                });
+            });
+
+            districtBoundary.on('mouseout', function (e) {
+                districtBoundary.setStyle({
+                    fillOpacity: 0.5
+                });
+            });
+        });
+    </script>
 </body>
 </html>
 {% endblock %}

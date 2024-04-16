@@ -22,11 +22,11 @@
                             <a href={% url 'proposals' %}>View Proposals</a>
                         {% else %}
                             <a href="{% url 'submit_proposal' %}">Propose</a>
+                            <a href="/city_map">City map</a>
                         {% endif %}
                     {% else %}
                         <a href="{% provider_login_url 'google'%}?next=/">Login/Register with Google</a>
                     {% endif %}
-                    <a href="/city_map">City map</a>
                 </div>
             </div>
     </header>

@@ -1,0 +1,14 @@
+#map {
+    height: 400px;
+    width: 600px;
+    float: left;
+}
+#district-info-container {
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    float: left;
+    padding-left: 10px;
+    background-color: white; }
+h3{
+    margin-top: 5px;
+}
