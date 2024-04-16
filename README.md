@@ -84,7 +84,7 @@ Week 7 (04/10 - 04/17):
 1. Implement feature: Interactive Map Interface ✔️
 2. Integrate map API for district visualization ✔️
 3. Develop UI components for interactive map ✔️
-4. Implement functionality for highlighting projects on the map
-5. Test map interface for usability and performance
+4. Implement functionality for highlighting projects on the map ✔️
+5. Test map interface for usability and performance ✔️
 
 

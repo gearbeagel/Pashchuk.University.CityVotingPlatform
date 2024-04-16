@@ -5,4 +5,4 @@ from .models import UserSubmission
 class UserSubmissionForm(forms.ModelForm):
     class Meta:
         model = UserSubmission
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'district']

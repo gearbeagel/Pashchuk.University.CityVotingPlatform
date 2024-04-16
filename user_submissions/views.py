@@ -30,7 +30,8 @@ def approve_proposal(request, project_id):
         action = request.POST.get('action')
         if action == 'approve':
             project = Project(name=submission.name,
-                              description=submission.description
+                              description=submission.description,
+                              district=submission.district
                               )
             submission.is_approved = True
             project.save()
