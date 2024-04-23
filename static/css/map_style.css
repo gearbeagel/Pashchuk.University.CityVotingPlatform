@@ -1,14 +1,44 @@
 #map {
-    height: 400px;
+    height: 553px;
     width: 600px;
     float: left;
 }
-#district-info-container {
+
+#district-info {
     font-family: 'Montserrat', sans-serif;
     position: relative;
     float: left;
-    padding-left: 10px;
-    background-color: white; }
-h3{
-    margin-top: 5px;
+    margin-left: 0;
+    padding: 10px;
+}
+
+.leaflet-popup-content {
+    width: 250px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.hidden {
+    display: none;
+}
+
+h3 {
+    margin-top: 0;
+}
+#district-popup-content a {
+    color: #2040b4;;
+    text-decoration: none;
+}
+
+#district-popup-content a:hover {
+    text-decoration: underline;
+}
+
+
+hr {
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: #ccc; /* You can adjust the color as needed */
+    margin-top: 10px; /* Add some margin for spacing */
+    margin-bottom: 10px;
 }

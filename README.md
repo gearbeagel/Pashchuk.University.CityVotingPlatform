@@ -87,4 +87,9 @@ Week 7 (04/10 - 04/17):
 4. Implement functionality for highlighting projects on the map ✔️
 5. Test map interface for usability and performance ✔️
 
-
+Week 8 (04/17 - 04/24):
+1. Implement feature: District Information ✔️
+2. Design database schema for district data ✔️
+3. Develop backend services for fetching district information ✔️
+4. Design UI components for displaying district details ✔️
+5. Integrate district information with interactive map interface ✔️
