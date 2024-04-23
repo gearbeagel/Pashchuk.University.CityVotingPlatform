@@ -110,6 +110,8 @@ DEFAULT_DATABASE_URL = (
     f'mssql://krato:{db_password}@citivoting-db-server.database.windows.net/cityvoting_db?driver=ODBC'
     '+Driver+17+for+SQL+Server')
 
+CONN_MAX_AGE = 60
+
 DATABASE_URL = os.environ.get('DATABASE_URL', DEFAULT_DATABASE_URL)
 os.environ['DJANGO_DATABASE_URL'] = DATABASE_URL.format(**os.environ)
 
