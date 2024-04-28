@@ -107,7 +107,7 @@ db_password: str = os.getenv('db_password')
 environ.Env.DB_SCHEMES['mssql'] = 'mssql'
 env = environ.Env(DEBUG=(bool, False))
 DEFAULT_DATABASE_URL = (
-    f'mssql://krato:{db_password}@citivoting-db-server.database.windows.net/cityvoting_db?driver=ODBC'
+    f'mssql://krato:{db_password}@new-citivoting-db-server.database.windows.net/new-cityvoting-db?driver=ODBC'
     '+Driver+17+for+SQL+Server')
 
 CONN_MAX_AGE = 20
@@ -163,7 +163,7 @@ USE_TZ = True
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Site ID
-SITE_ID = 4
+SITE_ID = 5
 
 # Social authentication settings
 SOCIALACCOUNT_LOGIN_ON_GET = True
