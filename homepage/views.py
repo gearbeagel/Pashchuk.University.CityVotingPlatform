@@ -93,7 +93,9 @@ def update_notification_settings(request):
     if request.method == 'POST':
         form = NotificationsForm(request.POST, instance=notifications_instance)
         if form.is_valid():
-            form.save()
+            notif_changes = form.save(commit=False)
+            notif_changes.user = request.user
+            notif_changes.save()
             messages.success(request, 'Notification settings were changed.')
             return redirect('profile')
     else:
