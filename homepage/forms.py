@@ -1,7 +1,7 @@
 from django import forms
 from storages.backends.azure_storage import AzureStorage
 
-from .models import ImageStorage
+from .models import ImageStorage, Notifications
 from CityVotingPlatform import settings
 
 
@@ -24,3 +24,14 @@ class ProfilePictureForm(forms.ModelForm):
         if commit:
             instance.save()
         return instance
+
+
+class NotificationsForm(forms.ModelForm):
+    class Meta:
+        model = Notifications
+        fields = ['comment_notifications', 'proposal_notifications', 'voting_notifications']
+        widgets = {
+            'comment_notifications': forms.CheckboxInput(),
+            'proposal_notifications': forms.CheckboxInput(),
+            'voting_notifications': forms.CheckboxInput(),
+        }

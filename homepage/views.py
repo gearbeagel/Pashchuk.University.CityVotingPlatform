@@ -1,11 +1,12 @@
 from azure.storage.blob import BlobServiceClient
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 import os
 
-from .models import ImageStorage
-from .forms import ProfilePictureForm
+from .models import ImageStorage, Notifications
+from .forms import ProfilePictureForm, NotificationsForm
 from voting.models import Project
 
 
@@ -35,7 +36,8 @@ def profile(request):
             context['error_message'] = message.message
         elif message.level == messages.SUCCESS:
             context['success_message'] = message.message
-
+    form = NotificationsForm(instance=Notifications.objects.filter(user=request.user).first())
+    context['notification_form'] = form
     return render(request, "homepage/profile.html", context)
 
 
@@ -44,6 +46,13 @@ def update_username(request):
     if request.method == 'POST':
         new_username = request.POST.get('new_username')
         if new_username:
+            if request.user.username == new_username:
+                messages.error(request, "New username is identical to the old one.")
+                return redirect('profile')
+            users = User.objects.filter(username=new_username)
+            if users:
+                messages.error(request, 'Username is already taken.')
+                return redirect('profile')
             request.user.username = new_username
             request.user.save()
             messages.success(request, 'Username has been changed.')
@@ -77,3 +86,15 @@ def update_profile_picture(request):
     else:
         return redirect('profile')
 
+
+@login_required
+def update_notification_settings(request):
+    notifications_instance = Notifications.objects.filter(user=request.user).first()
+    if request.method == 'POST':
+        form = NotificationsForm(request.POST, instance=notifications_instance)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Notification settings were changed.')
+            return redirect('profile')
+    else:
+        return redirect('profile')

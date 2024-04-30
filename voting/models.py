@@ -15,6 +15,7 @@ class Project(models.Model):
     ]
 
     name = models.CharField(max_length=200)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     description = models.TextField()
     district = models.CharField(max_length=50, choices=DISTRICT_CHOICES, default='Galician District')
     pub_date = models.DateTimeField(default=timezone.now)

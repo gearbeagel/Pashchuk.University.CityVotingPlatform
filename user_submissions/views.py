@@ -1,9 +1,12 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, redirect
+from django.contrib import messages
+
+from homepage.models import Notifications
 from .forms import UserSubmissionForm
 from .models import UserSubmission
 from voting.models import Project
-from django.contrib import messages
+from city_voting_registration.views import send_email
 
 
 def is_staff(user):
@@ -15,7 +18,15 @@ def submit_proposal(request):
     if request.method == "POST":
         form = UserSubmissionForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = request.user
+            submission = form.save(commit=False)
+            submission.user = request.user
+            user_notifs = Notifications.objects.filter(user=request.user).first()
+            if user_notifs.proposal_notifications is True:
+                subject = 'Thanks for proposing!'
+                message = f'Dear {user.username}. Thank you for proposing your idea! We appreciate your impact.'
+                send_email(request, subject, message)
+            submission.save()
             return redirect('home')
     else:
         form = UserSubmissionForm()
@@ -31,14 +42,23 @@ def approve_proposal(request, project_id):
         if action == 'approve':
             project = Project(name=submission.name,
                               description=submission.description,
-                              district=submission.district
+                              district=submission.district,
+                              user=submission.user
                               )
             submission.is_approved = True
             project.save()
+            subject = 'Your project was approved!'
+            message = f'Congratulations, {request.user.username}. Your project, {submission.name}, was approved.'
+            user_email = submission.user.email
+            send_email(request, subject, message, user_email)
             submission.delete()
             messages.success(request, 'Proposal was approved.')
             return redirect('proposals')
         if action == 'reject':
+            subject = 'Your project was rejected'
+            message = f'Dear {request.user.username}. Unfortunately, your project, {submission.name}, was rejected.'
+            user_email = submission.user.email
+            send_email(request, subject, message, user_email)
             submission.delete()
             messages.error(request, 'Proposal was rejected.')
             return redirect('proposals')

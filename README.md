@@ -28,6 +28,8 @@ City Voting Platform is the best decision for government of a small city to conn
 - Commenting system.
 - User Profile Management.
 - Interactive Map Interface.
+- District Information.
+- Notification System.
 - Coming soon.
 
 ### Architecture
@@ -93,3 +95,10 @@ Week 8 (04/17 - 04/24):
 3. Develop backend services for fetching district information ✔️
 4. Design UI components for displaying district details ✔️
 5. Integrate district information with interactive map interface ✔️
+
+Week 9 (04/24 - 05/01):
+1. Implement feature: Notification System ✔️
+2. Develop backend logic for sending notifications ✔️
+3. Design UI for notification display ✔️
+4. Integrate notification system with user profiles ✔️
+5. Test notification delivery and user interaction ✔️

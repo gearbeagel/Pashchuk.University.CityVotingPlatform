@@ -10,12 +10,12 @@ from homepage.models import ImageStorage
 
 
 @login_required
-def welcome_email(request):
+def send_email(request, subject, message, user_email=None):
     user = request.user
-    subject = 'Welcome to City Voting Platform!'
-    message = f'{user.username}, thanks for becoming a part of our community!'
     from_email = settings.EMAIL_HOST_USER
     recipient_list = [user.email]
+    if user_email:
+        recipient_list[0] = user_email
     send_mail(subject, message, from_email, recipient_list, fail_silently=False)
     return redirect('home')
 

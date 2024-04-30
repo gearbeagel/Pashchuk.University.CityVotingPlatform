@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 
@@ -10,6 +11,7 @@ class UserSubmission(models.Model):
         ('Sykhivskyi District', 'Sykhivskyi District'),
         ('Zaliznychnyi District', 'Zaliznychnyi District'),
     ]
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     name = models.CharField(max_length=200)
     description = models.TextField()
     district = models.CharField(max_length=50, choices=DISTRICT_CHOICES, default='Galician District')

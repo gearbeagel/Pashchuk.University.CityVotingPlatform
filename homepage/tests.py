@@ -2,6 +2,8 @@ from django.test import TestCase, Client
 from django.urls import reverse
 from django.contrib.auth.models import User
 
+from homepage.models import Notifications
+
 
 class ViewsTestCase(TestCase):
     def setUp(self):
@@ -70,5 +72,29 @@ class UpdateProfilePictureTestCase(TestCase):
         self.client.login(username='testuser', password='password123')
         response = self.client.post(reverse('update_profile_picture'), {})
         self.assertEqual(response.status_code, 302)
+
+
+class UpdateNotifSettingsTestCase(TestCase):
+    def setUp(self):
+        self.client = Client()
+        self.user = User.objects.create(username='testuser')
+        self.client.force_login(self.user)
+
+    def test_update_notification_settings_get_redirect(self):
+        response = self.client.get(reverse('update_notification_settings'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_update_notification_settings_post_success(self):
+        Notifications.objects.create(user=self.user)
+        data = {'proposal_notifications': 'some_value'}
+        response = self.client.post(reverse('update_notification_settings'), data)
+        self.assertEqual(response.status_code, 302)
+
+    def test_update_notification_settings_post_invalid_form(self):
+        Notifications.objects.create(user=self.user)
+        data = {'some_notification_field': ''}
+        response = self.client.post(reverse('update_notification_settings'), data)
+        self.assertEqual(response.status_code, 302)
+
 
 
