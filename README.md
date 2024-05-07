@@ -102,3 +102,10 @@ Week 9 (04/24 - 05/01):
 3. Design UI for notification display ✔️
 4. Integrate notification system with user profiles ✔️
 5. Test notification delivery and user interaction ✔️
+
+Week 10 (05/01 - 05/08):
+1. Implement feature: Admin Panel
+2. Design admin dashboard UI
+3. Develop backend services for admin functionalities
+4. Implement user management features for admins
+5. Test admin panel for security and functionality

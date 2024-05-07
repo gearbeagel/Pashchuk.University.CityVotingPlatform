@@ -2,7 +2,6 @@
 {% load static %}
 {% block content %}
 <link rel="stylesheet" href="{% static 'css/detail_style.css' %}">
-<link rel="stylesheet" href="{% static 'css/notification_style.css' %}">
 <div class="project-container">
 <div class="project-content">
     <h2 class="project-card-title">{{ project.name }}</h2>
@@ -56,34 +55,14 @@
         <li class="comment">
             <div class="comment-header">
                 <div class="profile-picture-container">
-                    {% if profile_pictures.comment.user.username %}
-                    <img src="{{ profile_pictures.comment.user.username.url }}" alt="Profile Picture" class="profile-picture">
-                    {% else %}
-                    <img src="{% static 'images/default_profile_picture.png' %}" alt="Default Profile Picture" class="profile-picture">
-                    {% endif %}
+                    <img src="{{ comment.0 }}" alt="Profile Picture" class="profile-picture">
                 </div>
-                <span class="comment-username" onclick="replyTo('{{ comment.user.username }}')">{{ comment.user.username }}:</span>
-                <p class="comment-text">{{ comment.comment_text }}</p>
+                <span class="comment-username" onclick="replyTo('{{ comment.1.user.username }}')">{{ comment.1.user.username }}:</span>
+                <p class="comment-text">{{ comment.1.comment_text }}</p>
             </div>
         </li>
         {% endfor %}
     </ul>
 </div>
-    {% if error_message %}
-<div class="notification-container" data-duration="3000">
-    <div class="notification">
-        <span class="close-btn" onclick="closeNotification()">×</span>
-        <p>{{ error_message }}</p>
-    </div>
-</div>
-    {% elif success_message %}
-<div class="notification-container" data-duration="3000">
-    <div class="notification success">
-        <span class="close-btn" onclick="closeNotification()">×</span>
-        <p>{{ success_message }}</p>
-    </div>
-</div>
-{% endif %}
-<script src="{% static 'js/notification.js' %}"></script>
 <script src="{% static 'js/comment_reply.js' %}"></script>
 {% endblock %}

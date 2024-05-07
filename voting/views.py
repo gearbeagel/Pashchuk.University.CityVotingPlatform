@@ -1,7 +1,9 @@
+import os
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import Http404
 from django.contrib import messages
+from azure.storage.blob import BlobServiceClient
 
 from .models import Project, Vote, UserChoice, Comment
 from homepage.models import ImageStorage, Notifications
@@ -13,43 +15,34 @@ def detail(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     user = request.user
     user_voted = UserChoice.objects.filter(user=user, project=project)
-    comments = Comment.objects.filter(project=project)
-    comments = comments.order_by('-pub_date')
-    img_object = ImageStorage.objects.filter(user=user).first()
-    profile_picture = None
-    if img_object:
-        profile_picture = img_object.profile_picture
-    error_message = None
-    success_message = None
+    comments_query = Comment.objects.filter(project=project)
+    comments_query = comments_query.order_by('-pub_date')
+    azure_storage_connection_string = os.getenv("connection_str")
+    container_name = "profpicscont"
+    comments = []
+    for comment in comments_query:
+        img_object = ImageStorage.objects.filter(user=comment.user).first()
+        blob_name = img_object.profile_picture
+
+        blob_service_client = BlobServiceClient.from_connection_string(azure_storage_connection_string)
+        blob_client = blob_service_client.get_blob_client(container=container_name, blob=blob_name)
+
+        profile_picture = blob_client.url
+        comments.append([profile_picture, comment])
+    context = {'comments': comments}
     for message in messages.get_messages(request):
         if message.level == messages.ERROR:
-            error_message = message.message
+            context['error_message'] = message.message
         elif message.level == messages.SUCCESS:
-            success_message = message.message
+            context['success_message'] = message.message
     try:
         project = Project.objects.get(pk=project_id)
     except Project.DoesNotExist:
         raise Http404("Project does not exist")
+    context['project'] = project
     if user_voted:
-        if error_message:
-            return render(request, 'voting/detail.html',
-                          {'project': project, 'user_voted': user_voted, 'comments': comments,
-                           'error_message': error_message, 'profile_picture': profile_picture})
-        elif success_message:
-            return render(request, 'voting/detail.html',
-                          {'project': project, 'user_voted': user_voted, 'comments': comments,
-                           'success_message': success_message, 'profile_picture': profile_picture})
-        else:
-            return render(request, 'voting/detail.html',
-                          {'project': project, 'user_voted': user_voted, 'comments': comments, 'profile_picture': profile_picture})
-    else:
-        if error_message:
-            return render(request, 'voting/detail.html',
-                          {'project': project, 'user_voted': user_voted, 'comments': comments,
-                           'error_message': error_message, 'profile_picture': profile_picture})
-        else:
-            return render(request, 'voting/detail.html',
-                          {'project': project, 'comments': comments, 'profile_picture': profile_picture})
+        context['user_voted'] = user_voted
+    return render(request, 'voting/detail.html', context)
 
 
 # Vote for a project

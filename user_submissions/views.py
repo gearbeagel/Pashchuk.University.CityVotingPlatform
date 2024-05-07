@@ -70,17 +70,17 @@ def approve_proposal(request, project_id):
 @user_passes_test(is_staff, login_url='/')
 def proposals(request):
     proposal_projects = UserSubmission.objects.order_by('-id')
-    fail_message = None
+    error_message = None
     success_message = None
 
     for message in messages.get_messages(request):
         if message.level == messages.ERROR:
-            fail_message = message.message
+            error_message = message.message
         elif message.level == messages.SUCCESS:
             success_message = message.message
 
     return render(request, "proposal_submission/propose_approval.html", {
         'proposal_projects': proposal_projects,
-        'fail_message': fail_message,
+        'error_message': error_message,
         'success_message': success_message
     })

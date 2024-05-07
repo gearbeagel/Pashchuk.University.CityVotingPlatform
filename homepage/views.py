@@ -12,7 +12,13 @@ from voting.models import Project
 
 def home(request):
     projects = Project.objects.order_by('-pub_date')[:5]
-    return render(request, "homepage/projects.html", {'projects': projects})
+    context = {'projects': projects}
+    for message in messages.get_messages(request):
+        if message.level == messages.ERROR:
+            context['error_message'] = message.message
+        elif message.level == messages.SUCCESS:
+            context['success_message'] = message.message
+    return render(request, "homepage/projects.html", context)
 
 
 @login_required

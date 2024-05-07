@@ -9,7 +9,6 @@
     <title>Proposal Projects</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/projects_style.css' %}">
-    <link rel="stylesheet" href="{% static 'css/notification_style.css' %}">
 </head>
 <body>
     <div class="project-container">
@@ -49,23 +48,7 @@
             <div class="no-projects">There are no new proposals :(</div>
         {% endif %}
     </div>
-    {% if fail_message %}
-<div class="notification-container" data-duration="3000">
-    <div class="notification">
-        <span class="close-btn" onclick="closeNotification()">×</span>
-        <p>{{ fail_message }}</p>
-    </div>
-</div>
-    {% elif success_message %}
-<div class="notification-container" data-duration="3000">
-    <div class="notification success">
-        <span class="close-btn" onclick="closeNotification()">×</span>
-        <p>{{ success_message }}</p>
-    </div>
-</div>
-{% endif %}
     <script src="{% static 'js/projects_description.js' %}"></script>
-    <script src="{% static 'js/notification.js' %}"></script>
 </body>
 </html>
 
