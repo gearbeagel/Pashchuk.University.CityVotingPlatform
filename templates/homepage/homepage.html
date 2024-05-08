@@ -18,12 +18,12 @@
                 <div class="header-right">
                     {% if user.is_authenticated %}
                         <a href="/profile">Profile</a>
+                        <a href="/city_map">City map</a>
                         {% if user.is_staff %}
-                            <a href={% url 'proposals' %}>View Proposals</a>
+                            <a href={% url 'admin_panel' %}>Admin Panel</a>
                         {% else %}
                             <a href="{% url 'submit_proposal' %}">Propose</a>
                         {% endif %}
-                        <a href="/city_map">City map</a>
                         <a href="{% url 'logout_view' %}">Logout</a>
                     {% else %}
                         <a href="{% provider_login_url 'google'%}?next=/">Login/Register with Google</a>

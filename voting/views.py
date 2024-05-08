@@ -11,6 +11,7 @@ from city_voting_registration.views import send_email
 
 
 # Show specific project data and votes
+@login_required
 def detail(request, project_id):
     project = get_object_or_404(Project, pk=project_id)
     user = request.user

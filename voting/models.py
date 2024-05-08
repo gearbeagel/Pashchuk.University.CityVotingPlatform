@@ -24,9 +24,12 @@ class Project(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        Vote.objects.create(project=self, choice_text='Approve')
-        Vote.objects.create(project=self, choice_text='Disapprove')
+        if not self.pk:
+            super().save(*args, **kwargs)
+            Vote.objects.create(project=self, choice_text='Approve')
+            Vote.objects.create(project=self, choice_text='Disapprove')
+        else:
+            super().save(*args, **kwargs)
 
 
 # Vote class

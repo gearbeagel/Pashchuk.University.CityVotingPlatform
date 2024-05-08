@@ -54,7 +54,7 @@
 .project-card-text-container {
     font-family: 'Roboto Slab', serif;
     margin-bottom: 20px;
-    width: 100%; /* Ensure the description takes full width */
+    width: 100%;
 }
 
 .project-card-text {
@@ -78,24 +78,20 @@
     margin-top: 20px;
 }
 
-/* Styling for form-check (checkboxes) */
 .form-check {
     margin-bottom: 10px;
 }
 
-/* Styling for checkboxes */
 .form-check-input[type="radio"] {
-    cursor: pointer; /* Change cursor to pointer when hovering over radio buttons */
+    cursor: pointer;
 }
 
-/* Styling for checkbox labels */
 .form-check-label {
-    cursor: pointer; /* Change cursor to pointer when hovering over checkbox labels */
+    cursor: pointer;
 }
 
-/* Styling for vote button */
 input[type="submit"].btn-success {
-    cursor: pointer; /* Change cursor to pointer when hovering over vote button */
+    cursor: pointer;
     display: inline-block;
     padding: 8px 20px;
     border: none;
@@ -106,7 +102,6 @@ input[type="submit"].btn-success {
     transition: background-color 0.3s ease;
 }
 
-/* Change button background color on hover */
 input[type="submit"].btn-success:hover {
     background-color: #d9d8da;
     color: black;
@@ -212,4 +207,17 @@ ul{
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+
+.report-link {
+    color: #999;
+    font-size: 14px;
+    text-decoration: none;
+    opacity: 0.6;
+}
+
+.report-comment-container {
+    margin-top: 5px;
+    margin-left: 1px;
 }

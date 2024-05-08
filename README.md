@@ -30,6 +30,7 @@ City Voting Platform is the best decision for government of a small city to conn
 - Interactive Map Interface.
 - District Information.
 - Notification System.
+- Admin Panel.
 - Coming soon.
 
 ### Architecture
@@ -104,8 +105,8 @@ Week 9 (04/24 - 05/01):
 5. Test notification delivery and user interaction ✔️
 
 Week 10 (05/01 - 05/08):
-1. Implement feature: Admin Panel
-2. Design admin dashboard UI
-3. Develop backend services for admin functionalities
-4. Implement user management features for admins
-5. Test admin panel for security and functionality
+1. Implement feature: Admin Panel ✔️
+2. Design admin dashboard UI ✔️
+3. Develop backend services for admin functionalities ✔️
+4. Implement user management features for admins ✔️
+5. Test admin panel for security and functionality ✔️

@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'homepage',
     'voting',
     'user_submissions',
+    'admin_panel',
 ]
 
 MIDDLEWARE = [

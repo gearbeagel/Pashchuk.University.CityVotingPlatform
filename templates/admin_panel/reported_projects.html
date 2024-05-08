@@ -1,0 +1,55 @@
+{% extends 'homepage/homepage.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reported Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/projects_style.css' %}">
+</head>
+<body>
+    <div class="project-container">
+        <header class="project-header">
+            <h1>Reported Projects</h1>
+        </header>
+        {% if reported_projects %}
+            {% for project in reported_projects %}
+                <div class="project-content">
+                    <div class="project-card">
+                        <h2 class="project-card-title">{{ project.name }}</h2>
+                        <div class="project-metadata">
+                            <p class="project-id">№ {{ project.id }}</p>
+                            <p class="project-upload-date">{{ project.district }}</p>
+                        </div>
+                        <div class="project-card-text-container">
+                            <p class="project-card-text">{{ project.description }}</p>
+                            {% if project.description|length > 700 %}
+                                <button class="show-more-btn">Show more</button>
+                            {% endif %}
+                        </div>
+                        <div class="approval-rejection">
+                        <form method="post" action="{% url 'reported_project_management' project.id %}">
+                            {% csrf_token %}
+                            <button class="action-button" type="submit" name="action" value="approve">
+                                ✔️
+                            </button>
+                            <button class="action-button" type="submit" name="action" value="reject">
+                                ❌
+                            </button>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-projects">There are no reported projects!</div>
+        {% endif %}
+    </div>
+    <script src="{% static 'js/projects_description.js' %}"></script>
+</body>
+</html>
+
+{% endblock %}
