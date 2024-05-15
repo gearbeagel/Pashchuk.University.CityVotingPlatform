@@ -1,0 +1,124 @@
+{% extends 'homepage/homepage.html' %}
+{% load static %}
+
+{% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Lviv Choropleth Map</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="{% static 'css/map_style.css' %}">
+</head>
+<body>
+    <div id="map"></div>
+    <div id="district-info" class="hidden"></div>
+    <script>
+        const map = L.map('map', {
+            dragging: false,
+            scrollWheelZoom: false,
+            maxZoom: 11,
+            minZoom: 11
+        }).setView([49.842957, 24.031111], 11);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        var districtsData = {% include 'citymap/dist_json.json' %};
+        const districtInfoContainer = document.getElementById('district-info');
+
+        districtsData.forEach(function(districtData) {
+            const coordinates = districtData.coordinates.map(function (point) {
+                return [point.lat, point.lon];
+            });
+            const districtBoundary = L.polygon(coordinates, {
+                fillColor: 'darkblue',
+                fillOpacity: 0.5,
+                color: 'darkblue',
+                weight: 2
+            }).addTo(map);
+            districtBoundary.bindPopup('<div id="district-popup-content"></div>');
+
+            districtBoundary.on('mouseover', function (e) {
+                fetchDistrictInfo(districtData.name);
+                showDistrictInfo();
+            });
+
+            districtBoundary.on('click', function (e) {
+                fetchProjects(districtData.name);
+            });
+
+            districtBoundary.on('mouseover', function (e) {
+                districtBoundary.setStyle({
+                    fillOpacity: 1
+                });
+            });
+
+            districtBoundary.on('mouseout', function (e) {
+                districtBoundary.setStyle({
+                    fillOpacity: 0.5
+                });
+            });
+        });
+
+        function fetchAdministrationContact(districtName) {
+            return fetch('/district-info/?name=' + districtName)
+                .then(response => response.json())
+                .then(data => data.administration_contact)
+                .catch(error => {
+                    console.error('Error fetching administration contact:', error);
+                    return '#'; // Default link in case of error
+                });
+        }
+
+        function fetchProjects(districtName) {
+            setTimeout(() => {
+                fetch('/projects/?district=' + districtName)
+                    .then(response => response.json())
+                    .then(data => {
+                        const projectsContainer = document.getElementById('district-popup-content');
+                        projectsContainer.innerHTML = '<h3>Projects in ' + districtName + ':</h3>';
+                        if (data.length > 0) {
+                            const projectTitles = data.map(project => '<a href="/projects/' + project.id + '">' + project.name + '</a>');
+                            projectsContainer.innerHTML += projectTitles.join('<br>');
+                        } else {
+                            projectsContainer.innerHTML += '<p>No projects available :(</p>';
+                        }
+                        // Fetch administration contact and include it in the HTML
+                        fetchAdministrationContact(districtName).then(administrationContact => {
+                            projectsContainer.innerHTML += '<hr><a href="' + administrationContact + '">Contact Administration</a></hr>';
+                        });
+                    })
+                    .catch(error => console.error('Error fetching projects:', error));
+            }, 100);
+        }
+
+        function fetchDistrictInfo(districtName) {
+            fetch('/district-info/?name=' + districtName)
+                .then(response => response.json())
+                .then(data => {
+                    districtInfoContainer.innerHTML = '<h3>' + districtName + '</h3>';
+                    districtInfoContainer.innerHTML += '<p>Population: ' + data.population + '</p>';
+                    districtInfoContainer.innerHTML += '<p>Area: ' + data.area + ' hectares</p>';
+                    districtInfoContainer.innerHTML += '<p>Administration: ' + data.administration + '</p>';
+                })
+                .catch(error => console.error('Error fetching district info:', error));
+        }
+
+        function showDistrictInfo() {
+            const districtInfoContainer = document.getElementById('district-info');
+            districtInfoContainer.classList.remove('hidden');
+        }
+
+        function hideDistrictInfo() {
+            const districtInfoContainer = document.getElementById('district-info');
+            districtInfoContainer.classList.add('hidden');
+        }
+
+        map.on('click', function (e) {
+            hideDistrictInfo();
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

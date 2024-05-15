@@ -1,0 +1,56 @@
+{% extends 'homepage/homepage.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Project Analytics</title>
+    <link rel="stylesheet" href="{% static 'css/project_analytics_style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="pillar">
+            <h1>Top Projects by Comments</h1>
+            <ul>
+                {% for project in top_projects_by_comments %}
+                    <li>{{ project.project__name }} - {{ project.comment_count }}</li>
+                {% endfor %}
+            </ul>
+            <div class="bar" style="height: {{ top_projects_by_comments.0.comment_count }}px;"></div>
+        </div>
+
+        <div class="pillar">
+            <h1>Top Projects by Votes</h1>
+            <ul>
+                {% for project in top_projects_by_votes %}
+                    <li>{{ project.project__name }} - {{ project.total_votes }}</li>
+                {% endfor %}
+            </ul>
+            <div class="bar" style="height: {{ top_projects_by_votes.0.total_votes }}px;"></div>
+        </div>
+
+        <div class="pillar">
+            <h1>Top Projects by Approve Choices</h1>
+            <ul>
+                {% for project in top_projects_by_approve %}
+                    <li>{{ project.project.name }} - {{ project.votes }}</li>
+                {% endfor %}
+            </ul>
+            <div class="bar" style="height: {{ top_projects_by_approve.0.votes }}px;"></div>
+        </div>
+
+        <div class="pillar">
+            <h1>Top Projects by Disapprove Choices</h1>
+            <ul>
+                {% for project in top_projects_by_disapprove %}
+                    <li>{{ project.project.name }} - {{ project.votes }}</li>
+                {% endfor %}
+            </ul>
+            <div class="bar" style="height: {{ top_projects_by_disapprove.0.votes }}px;"></div>
+        </div>
+    </div>
+</body>
+</html>
+{% endblock %}

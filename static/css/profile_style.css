@@ -1,0 +1,154 @@
+body {
+    background-color: #f0f0f0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.content-header, .content {
+    width: 80%;
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.topic {
+    text-align: center;
+}
+
+.topic p {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.topic a {
+    display: inline-block;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #1a2039;
+    border: 2px solid #1a2039;
+    padding: 10px 20px;
+    border-radius: 5px;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.topic a:hover {
+    background-color: #ffffff;
+    color: #1a2039;
+}
+
+.profile-picture {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+}
+
+.profile-picture img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#change-username-link, #change-profile-picture-link, #view-notification-settings {
+    color: #1a2039;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+#username-form-container, #profile-picture-input {
+    margin-top: 10px;
+}
+
+#delete-user-form button {
+    background-color: #ce2929;
+    color: #fff;
+    padding: 10px 20px;
+    margin-top: 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#delete-user-form button:hover {
+    background-color: #810202;
+}
+
+#new-username {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+#username-form button[type="submit"] {
+    background-color: #1a2039;
+    border: 2px solid #1a2039;
+    color: #ffffff;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#username-form button[type="submit"]:hover {
+    background-color: #ffffff;
+    color: #1a2039;
+}
+#profile-picture{
+    margin-top: 15px;
+}
+#profile-picture button[type="submit"] {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a2039;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#profile-picture button[type="submit"]:hover {
+    background-color: #0f1322;
+}
+
+.profile-picture-input{
+}
+
+.profile-picture-input-label {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a2039;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.profile-picture-input-label:hover{
+    background-color: #0f1322;
+}
+
+#notification-form button[type="submit"] {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #1a2039;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#notification-form button[type="submit"]:hover {
+    background-color: #0f1322;
+}

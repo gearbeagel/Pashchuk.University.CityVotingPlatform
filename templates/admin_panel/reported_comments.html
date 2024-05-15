@@ -1,0 +1,48 @@
+{% extends 'homepage/homepage.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Reported Comments</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/detail_style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/projects_style.css' %}">
+</head>
+<body>
+<div class="comment-section">
+    <header class="project-header">
+        <h1>Reported Comments</h1>
+    </header>
+    {% if reported_comments %}
+    <ul class="all_comments">
+        {% for comment in reported_comments %}
+        <li class="comment">
+            <div class="comment-header">
+                <span class="comment-username">{{ comment.user.username }}:</span>
+                <p class="comment-text">{{ comment.comment_text }}</p>
+            </div>
+        </li>
+        <div class="approval-rejection">
+            <form method="post" action="{% url 'reported_comment_management' comment.id %}">
+                {% csrf_token %}
+                <button class="action-button" type="submit" name="action" value="approve">
+                    ✔️
+                </button>
+                <button class="action-button" type="submit" name="action" value="reject">
+                    ❌
+                </button>
+            </form>
+        </div>
+        {% endfor %}
+    </ul>
+    {% else %}
+        <div class="no-projects">There are no reported comments!</div>
+    {% endif %}
+</div>
+</body>
+</html>
+
+{% endblock %}

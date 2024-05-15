@@ -1,0 +1,135 @@
+.project-container {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f6f6f7;
+    margin: 0;
+    padding: 0;
+    min-height: 88vh;
+}
+
+.project-header {
+    background-color: #f6f6f7;
+    color: black;
+    text-align: center;
+    padding: 20px 0;
+}
+.project-disclaimer{
+    font-weight: 300;
+    font-size: 24px;
+}
+.project-content {
+    max-width: 2000px;
+    margin: 0 auto;
+    padding: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.project-card {
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    padding: 20px;
+    width: 48%;
+    flex-grow: 1;
+}
+
+.project-card-text-container {
+    font-family: 'Roboto Slab', serif;
+}
+
+.project-card-text {
+    color: black;
+    word-wrap: break-word;
+    overflow: hidden;
+    max-height: 110px;
+    transition: max-height 0.3s ease;
+    margin-top: 5px;
+}
+
+.project-card-text.expanded {
+    max-height: none;
+}
+
+.project-card-title {
+    font-family: 'Roboto Slab', serif;
+    font-weight: 600;
+    font-size: 30px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    display: inline;
+}
+
+.project-card-title.authenticated{
+    cursor: pointer;
+}
+
+.project-card-title.not-authenticated {
+    cursor: default;
+}
+
+.project-metadata {
+    font-family: 'Roboto Slab', serif;
+}
+
+.project-id {
+    font-weight: bold;
+    color: white;
+    margin-right: 10px;
+    margin-bottom: 15px;
+    display: inline-block;
+    padding: 2px 6px;
+    background-color: #1a2039;
+    border-radius: 3px;
+}
+
+.project-upload-date{
+    font-weight: normal;
+    color: #9c9faf;
+    margin-top: 1px;
+    margin-bottom: 12px;
+}
+
+.no-projects {
+    color: #000000;
+    font-family: 'Roboto Slab', serif;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+}
+
+
+.show-more-btn {
+    background-color: #1a2039;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    outline: none;
+    margin-top: auto;
+    border-radius: 5px;
+}
+
+.approval-rejection{
+    display: inline-block;
+}
+
+.action-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 768px) {
+    .project-card {
+        width: 100%;
+    }
+
+    .project-card-text {
+        max-height: none;
+    }
+}

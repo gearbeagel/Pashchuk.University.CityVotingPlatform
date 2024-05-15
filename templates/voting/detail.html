@@ -1,0 +1,70 @@
+{% extends 'homepage/homepage.html' %}
+{% load static %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'css/detail_style.css' %}">
+<div class="project-container">
+    <div class="project-content">
+        <h2 class="project-card-title">{{ project.name }} <a href="{% url 'report_project' project.id %}" class="report-link">Report</a></h2>
+        <div class="project-metadata">
+            <p class="project-id">№ {{ project.id }}</p>
+            <p class="project-upload-date">Uploaded on: {{ project.pub_date }}</p>
+        </div>
+        <div class="project-card-text-container">
+            <p class="project-card-text">{{ project.description }}</p>
+        </div>
+        {% if user_voted %}
+        <div class="alert alert-success"></div>
+        <h3>Results:</h3>
+        <ul class="list-group">
+            {% for choice in project.vote_set.all %}
+            <li class="list-group-item">
+                {{ choice.choice_text }}: <span class="badge badge-success float-right">{{ choice.votes }}
+                    vote{{ choice.votes | pluralize }}</span>
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <form action="{% url 'vote' project.id %}" method="post">
+            {% csrf_token %}
+            {% for choice in project.vote_set.all %}
+            <div class="form-check">
+                <input type="radio" name="vote" class="form-check-input" id="choice{{ forloop.counter }}"
+                    value="{{ choice.id }}" />
+                <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label>
+            </div>
+            {% endfor %}
+            <input type="submit" value="Vote" class="btn btn-success btn-lg btn-block mt-4" />
+        </form>
+        {% endif %}
+    </div>
+</div>
+<div class="comment-section">
+    <h2 class="comment-section-title">Share your thoughts:</h2>
+    <form action="{% url 'add_comment' project.id %}" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="comment_text">Leave a comment:</label>
+            <textarea class="form-control" id="comment_text" name="comment_text" rows="3"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+    <hr>
+    <h3>Comments:</h3>
+    <ul class="all_comments">
+        {% for comment in comments %}
+        <li class="comment">
+            <div class="comment-header">
+                <div class="profile-picture-container">
+                    <img src="{{ comment.0 }}" alt="Profile Picture" class="profile-picture">
+                </div>
+                <span class="comment-username" onclick="replyTo('{{ comment.1.user.username }}')">{{ comment.1.user.username }}:</span>
+                <p class="comment-text">{{ comment.1.comment_text }}</p>
+            </div>
+            <div class="report-comment-container">
+                <a href="{% url 'report_comment' comment.1.id %}" class="report-link">Report</a>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

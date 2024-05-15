@@ -1,0 +1,51 @@
+{% extends 'homepage/homepage.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Projects</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/projects_style.css' %}">
+</head>
+<body>
+    <div class="project-container">
+        <header class="project-header">
+            <h1>Recently uploaded projects</h1>
+            {% if not user.is_authenticated %}
+            <h2 class="project-disclaimer">Login to access more content</h2>
+            {% endif %}
+        </header>
+        {% if projects %}
+            {% for project in projects %}
+                <div class="project-content">
+                    <div class="project-card">
+                    {% if not user.is_authenticated %}
+                        <h2 class="project-card-title not-authenticated">{{ project.name }}</h2>
+                    {% else %}
+                        <h2 class="project-card-title authenticated" onclick="redirectToDetailPage({{ project.id }})">{{ project.name }}</h2>
+                    {% endif %}
+                        <div class="project-metadata">
+                            <p class="project-id">№ {{ project.id }}</p>
+                            <p class="project-upload-date">{{ project.district }} • {{ project.pub_date }}</p>
+                        </div>
+                        <div class="project-card-text-container">
+                            <p class="project-card-text">{{ project.description }}</p>
+                            {% if project.description|length > 700 %}
+                                <button class="show-more-btn">Show more</button>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-projects">No projects available :(</div>
+        {% endif %}
+    </div>
+    <script src="{% static 'js/project_redirect.js' %}"></script>
+    <script src="{% static 'js/projects_description.js' %}"></script>
+</body>
+</html>
+{% endblock %}
