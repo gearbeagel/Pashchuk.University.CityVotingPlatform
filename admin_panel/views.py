@@ -1,10 +1,11 @@
+from django.db.models import Count, Sum
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 
 from city_voting_registration.views import send_email
 from user_submissions.views import is_staff
-from voting.models import Project, Comment
+from voting.models import Project, Comment, Vote
 from .models import ReportOnComment, ReportOnProject
 
 
@@ -166,3 +167,29 @@ def reported_comment_management(request, comment_id):
             return redirect('reported_comments')
     else:
         return redirect('reported_comments')
+
+
+@login_required
+@user_passes_test(is_staff, login_url='/')
+def dashboard(request):
+    # Fetch top 3 projects by comments
+    top_projects_by_comments = Comment.objects.values('project__name').annotate(
+        comment_count=Count('project')).order_by('-comment_count')[:3]
+
+    # Fetch top 3 projects by most votes total
+    top_projects_by_votes = Vote.objects.values('project__name').annotate(
+        total_votes=Sum('votes')).order_by('-total_votes')[:3]
+
+    # Fetch top 3 projects by the biggest amount of 'approve' choices
+    top_projects_by_approve = Vote.objects.filter(choice_text='Approve').order_by('-votes')[:3]
+
+    # Fetch top 3 projects by the biggest amount of 'disapprove' choices
+    top_projects_by_disapprove = Vote.objects.filter(choice_text='Disapprove').order_by('-votes')[:3]
+
+    context = {
+        'top_projects_by_comments': top_projects_by_comments,
+        'top_projects_by_votes': top_projects_by_votes,
+        'top_projects_by_approve': top_projects_by_approve,
+        'top_projects_by_disapprove': top_projects_by_disapprove,
+    }
+    return render(request, 'admin_panel/project_analytics.html', context)

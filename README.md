@@ -31,6 +31,7 @@ City Voting Platform is the best decision for government of a small city to conn
 - District Information.
 - Notification System.
 - Admin Panel.
+- Analytics Dashboard.
 - Coming soon.
 
 ### Architecture
@@ -110,3 +111,11 @@ Week 10 (05/01 - 05/08):
 3. Develop backend services for admin functionalities ✔️
 4. Implement user management features for admins ✔️
 5. Test admin panel for security and functionality ✔️
+
+Week 11 (05/08 - 05/15):
+1. Implement feature: Analytics Dashboard ✔️
+2. Design database schema for analytics data ✔️
+3. Develop backend services for analytics processing ✔️
+4. Design UI components for displaying analytics insights ✔️
+5. Integrate analytics dashboard with voting and project data ✔️
+
