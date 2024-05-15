@@ -119,3 +119,7 @@ Week 11 (05/08 - 05/15):
 4. Design UI components for displaying analytics insights ✔️
 5. Integrate analytics dashboard with voting and project data ✔️
 
+## Anti-Lab 2
+- Kondratska
+- [My project](https://github.com/gearbeagel/Kondratska.University.AirplaneLearning)
+- [My fork](https://github.com/gearbeagel/Pashchuk.University.CityVotingPlatform)
