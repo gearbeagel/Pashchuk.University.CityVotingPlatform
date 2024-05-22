@@ -1,7 +1,7 @@
 # City Voting Platform
 
 ## About
-"City Voting Platform" is a website designed to empower citizens by allowing them to allocate funds to various projects across different districts of the city. Using this app, users can vote for existing projects, propose new ideas, and engage in discussions with other members of the community.
+"City Voting Platform" is a website designed to empower citizens by allowing them to vote for various projects across different districts of the city. Using this app, users can vote for existing projects, propose new ideas, and engage in discussions with other members of the community.
 
 ## Author
 Nikita Pashchuk
@@ -18,7 +18,7 @@ To run the project, follow next steps:
 
 ## Documentation
 ### Introduction
-City Voting Platform is the best decision for government of a small city to connect with society in order to create better place for all to live in. Using user-friendly interface and a variety of instruments people can allocate funds to different city projects, communicate with each other and much more!
+City Voting Platform is the best decision for government of a small city to connect with society in order to create better place for all to live in. Using user-friendly interface and a variety of instruments people can vote for different city projects, communicate with each other and much more!
 
 ### Features
 - User Authentication with Google account.
@@ -32,10 +32,10 @@ City Voting Platform is the best decision for government of a small city to conn
 - Notification System.
 - Admin Panel.
 - Analytics Dashboard.
-- Coming soon.
+- Help and Support.
 
 ### Architecture
-The City Voting Platform app follows a client-server architecture. The client-side is built using HTML, CSS, and Jinja, while the server-side is implemented with Django.
+The City Voting Platform app follows a client-server architecture. The client-side is built using HTML, CSS, and JS, while the server-side is implemented with Django.
 ![Architecture_diagram.png](Architecture_diagram.png "Architecture diagram") 
 
 ### Usage
@@ -47,7 +47,7 @@ Week 1 (02/27 - 03/06):
 2. Set up Azure environment for deployment ✔️
 3. Create Azure deployment pipelines ✔️
 4. Write Getting Started documentation ✔️
-5. Set up project repository on Github ✔️
+5. Set up project repository on GitHub ✔️
 
 Week 2 (03/06 - 03/13):
 1. Implement feature: Welcome Email upon registration ✔️
@@ -118,4 +118,12 @@ Week 11 (05/08 - 05/15):
 3. Develop backend services for analytics processing ✔️
 4. Design UI components for displaying analytics insights ✔️
 5. Integrate analytics dashboard with voting and project data ✔️
+
+Week 12 (05/15 - 05/22):
+1. Implement feature: Help and Support ✔️
+2. Develop help documentation pages ✔️
+3. Design UI for accessing help resources ✔️
+4. Implement support ticket system ✔️
+5. Test help and support features for accessibility and usability ✔️
+
 

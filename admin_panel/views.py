@@ -1,11 +1,13 @@
 from django.db.models import Count, Sum
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib import messages
 
 from city_voting_registration.views import send_email
+from help_and_support.forms import RequestTicketForm
 from user_submissions.views import is_staff
 from voting.models import Project, Comment, Vote
+from help_and_support.models import RequestTicket
 from .models import ReportOnComment, ReportOnProject
 
 
@@ -32,7 +34,7 @@ def report_project(request, project_id):
     report.save()
     subject = f'Fate of {project.name} project'
     message = (f'Dear {project.user.username}. '
-               ' Your project has been reported. It will still be visible until admins verdict')
+               " Your project has been reported. It will still be visible until admins' verdict")
     user_email = project.user.email
     send_email(request, subject, message, user_email)
     messages.success(request, 'Project was reported successfully. Wait for administration to response')
@@ -50,7 +52,7 @@ def report_comment(request, comment_id):
     report.save()
     subject = f'About your comment under {comment.project.name}'
     message = (f'Dear {comment.user.username}. '
-               f' Your comment "{comment.comment_text}" has been reported. It will still be visible until admins verdict')
+               f" Your comment '{comment.comment_text}' has been reported. It will still be visible until admins' verdict")
     user_email = comment.user.email
     send_email(request, subject, message, user_email)
     messages.success(request, 'Comment was reported successfully. Wait for administration to response')
@@ -172,20 +174,12 @@ def reported_comment_management(request, comment_id):
 @login_required
 @user_passes_test(is_staff, login_url='/')
 def dashboard(request):
-    # Fetch top 3 projects by comments
     top_projects_by_comments = Comment.objects.values('project__name').annotate(
         comment_count=Count('project')).order_by('-comment_count')[:3]
-
-    # Fetch top 3 projects by most votes total
     top_projects_by_votes = Vote.objects.values('project__name').annotate(
         total_votes=Sum('votes')).order_by('-total_votes')[:3]
-
-    # Fetch top 3 projects by the biggest amount of 'approve' choices
     top_projects_by_approve = Vote.objects.filter(choice_text='Approve').order_by('-votes')[:3]
-
-    # Fetch top 3 projects by the biggest amount of 'disapprove' choices
     top_projects_by_disapprove = Vote.objects.filter(choice_text='Disapprove').order_by('-votes')[:3]
-
     context = {
         'top_projects_by_comments': top_projects_by_comments,
         'top_projects_by_votes': top_projects_by_votes,
@@ -193,3 +187,33 @@ def dashboard(request):
         'top_projects_by_disapprove': top_projects_by_disapprove,
     }
     return render(request, 'admin_panel/project_analytics.html', context)
+
+
+@login_required
+@user_passes_test(is_staff, login_url='/')
+def show_requests(request):
+    requests = RequestTicket.objects.order_by('-id')
+    context = {}
+    for message in messages.get_messages(request):
+        if message.level == messages.ERROR:
+            context['error_message'] = message.message
+        elif message.level == messages.SUCCESS:
+            context['success_message'] = message.message
+    if request.method == 'POST':
+        form = RequestTicketForm(request.POST)
+        if form.is_valid():
+            title = form.cleaned_data['title']
+            description = form.cleaned_data['description']
+            user_email = request.POST.get('user_email', None)
+            request_id = request.POST.get('request_id', None)
+            request_ticket = RequestTicket.objects.filter(id=request_id).first()
+
+            send_email(request, title, description, user_email)
+            request_ticket.delete()
+            messages.success(request, 'Request ticket has been closed successfully.')
+            return redirect('show_requests')
+    else:
+        form = RequestTicketForm()
+    context['requests'] = requests
+    context['form'] = form
+    return render(request, 'admin_panel/requests.html', context)
