@@ -129,6 +129,6 @@ Week 12 (05/15 - 05/22):
 ## Anti-Lab 2
 - Nikita Pashchuk
 - [My project](https://github.com/NikitaPash/Pashchuk.University.CityVotingPlatform)
-- [My fork for Viktoria Kondratska](https://github.com/NikitaPash/Kondratska.University.AirplaneLearning)
+- [My fork for Victoria Kondratska](https://github.com/NikitaPash/Kondratska.University.AirplaneLearning)
 - [My fork for Vitaliy Zhuravskyi](https://github.com/NikitaPash/webproject)
 
