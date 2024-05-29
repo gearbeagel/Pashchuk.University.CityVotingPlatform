@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'voting',
     'user_submissions',
     'admin_panel',
+    'help_and_support',
 ]
 
 MIDDLEWARE = [

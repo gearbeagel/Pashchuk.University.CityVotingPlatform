@@ -10,6 +10,7 @@ urlpatterns = [
     path('', include('city_map.urls')),
     path('', include('homepage.urls')),
     path('', include('admin_panel.urls')),
+    path('', include('help_and_support.urls')),
     path('projects/', include('voting.urls')),
     path('proposal/', include('user_submissions.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

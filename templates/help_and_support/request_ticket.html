@@ -1,0 +1,23 @@
+{% extends 'homepage/homepage.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Request ticket</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/proposal_form_style.css' %}">
+</head>
+<body>
+    <header class="submit-header">
+        <h1>Submit a request ticket</h1>
+    </header>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
+{% endblock %}

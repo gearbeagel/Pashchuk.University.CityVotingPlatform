@@ -1,0 +1,43 @@
+{% extends 'homepage/homepage.html' %}
+{% load static %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Requests</title>
+    <link rel="stylesheet" href="{% static 'css/requests_style.css' %}">
+</head>
+<body>
+    <main>
+        <div class="page-header">
+            <h1>Requests</h1>
+        </div>
+        <div class="content">
+        {% if requests %}
+            {% for request in requests %}
+                <div class="request">
+                    <h2>{{ request.title }}</h2>
+                    <p>{{ request.description }}</p>
+                    <button onclick="toggleForm({{ request.id }})">Respond</button>
+                    <div id="form-{{ request.id }}" class="form-container">
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            {{ form.as_p }}
+                            <input type="hidden" name="user_email" value="{{ request.user.email }}">
+                            <input type="hidden" name="request_id" value="{{ request.id }}">
+                            <button type="submit">Send Email</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="no-requests">No requests at the moment :)</div>
+        {% endif %}
+        </div>
+    </main>
+    <script src="{% static 'js/user_requests.js' %}"></script>
+</body>
+</html>
+{% endblock %}
